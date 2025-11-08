@@ -780,13 +780,23 @@
         function loadGameState() {
             const savedState = localStorage.getItem('rngPlusFullGame');
             if (savedState) {
-                gameState = { ...gameState, ...JSON.parse(savedState) };
+                try {
+                    const parsedState = JSON.parse(savedState);
+                    // Объединяем сохраненное состояние с текущим, чтобы сохранить структуру
+                    gameState = { ...gameState, ...parsedState };
+                } catch (e) {
+                    console.error('Ошибка загрузки сохранения:', e);
+                }
             }
         }
 
         // Сохранение состояния игры в localStorage
         function saveGameState() {
-            localStorage.setItem('rngPlusFullGame', JSON.stringify(gameState));
+            try {
+                localStorage.setItem('rngPlusFullGame', JSON.stringify(gameState));
+            } catch (e) {
+                console.error('Ошибка сохранения:', e);
+            }
         }
 
         // Обновление интерфейса
@@ -890,14 +900,17 @@
                 item.className = 'library-item';
                 
                 // Пересчет шансов с учетом удаленных слов
-                let actualChance = word.chance;
-                let totalChance = wordsData.reduce((sum, w) => {
-                    if (!gameState.removedWords[w.rarity]) return sum + w.chance;
-                    return sum;
-                }, 0);
+                let totalChance = 0;
+                wordsData.forEach(w => {
+                    if (!gameState.removedWords[w.rarity] && w.rarity !== 'glitch') {
+                        totalChance += w.chance;
+                    }
+                });
                 
-                let chancePercent = ((actualChance / totalChance) * 100).toFixed(4);
-                if (isRemoved) {
+                let chancePercent = '???';
+                if (isUnlocked && !isRemoved) {
+                    chancePercent = ((word.chance / totalChance) * 100).toFixed(4) + '%';
+                } else if (isRemoved) {
                     chancePercent = '0% (удалено)';
                 }
                 
@@ -906,7 +919,7 @@
                 item.innerHTML = `
                     <div>
                         <span class="${word.rarity}">${word.name}</span>
-                        <span> - ${isUnlocked ? chancePercent + '%' : '???'}</span>
+                        <span> - ${chancePercent}</span>
                     </div>
                     <div>
                         ${isUnlocked && !isClaimed ? 
@@ -953,7 +966,7 @@
             // Заполняем слоты предметами
             let slotIndex = 0;
             for (const itemId in gameState.inventory) {
-                if (gameState.inventory[itemId] > 0) {
+                if (gameState.inventory[itemId] > 0 && slotIndex < 20) {
                     const item = itemsData[itemId];
                     const slot = inventoryItemsElement.children[slotIndex];
                     slot.className = 'inventory-slot';
@@ -979,7 +992,7 @@
             const button = event.target;
             const itemId = button.dataset.item;
             
-            if (gameState.inventory[itemId] <= 0) return;
+            if (!gameState.inventory[itemId] || gameState.inventory[itemId] <= 0) return;
             
             // Уменьшаем количество предмета
             gameState.inventory[itemId]--;
@@ -1180,6 +1193,11 @@
                 }
             }
             
+            // Бонус от GLITCH
+            if (gameState.activeEffects.glitchBonus) {
+                coinsEarned = coinsEarned * 3;
+            }
+            
             gameState.coins += coinsEarned;
             
             // Отмечаем слово как разблокированное в библиотеке
@@ -1201,7 +1219,10 @@
             
             if (sphereDropped) {
                 const sphereId = `${selectedWord.rarity}-sphere`;
-                addToInventory(sphereId, 1);
+                // Исправление: проверяем существование сферы
+                if (itemsData[sphereId]) {
+                    addToInventory(sphereId, 1);
+                }
             }
             
             // Показываем результат
@@ -1362,7 +1383,7 @@
                         }, 10000);
                     }, 10000);
                 }, 3000);
-            }, 60000);
+            }, 1000); // Уменьшено для тестирования (было 60000)
         }
 
         // Анимация для GLITCH
