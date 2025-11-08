@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RNG+ Полная версия</title>
+    <title>RNG+ V: 0.1</title>
     <style>
         * {
             box-sizing: border-box;
@@ -577,7 +577,7 @@
             { name: "GLITCH", rarity: "glitch", chance: 0, coins: 1404, price: 0 } // Шанс 0, так как выпадает только через глитч куб
         ];
 
-        // Данные о предметах
+        // Данные о предметах - добавлены все недостающие сферы
         const itemsData = {
             "flask": { name: "Колба", description: "Необходима для крафта" },
             "common-sphere": { name: "Обычная сфера", description: "Сфера обычного слова" },
@@ -587,12 +587,20 @@
             "legendary-sphere": { name: "Легендарная сфера", description: "Сфера легендарного слова" },
             "mythical-sphere": { name: "Мифическая сфера", description: "Сфера мифического слова" },
             "shadow-light-sphere": { name: "Сфера тени/света", description: "Сфера тени/света" },
+            "purple-sphere": { name: "Фиолетовая сфера", description: "Сфера фиолетового слова" },
+            "king-sphere": { name: "Сфера короля", description: "Сфера короля" },
+            "angel-sphere": { name: "Сфера ангела", description: "Сфера ангела" },
+            "mega-sphere": { name: "Сфера мега", description: "Сфера мега" },
             "divine-sphere": { name: "Божественная сфера", description: "Сфера божественного слова" },
             "darkness-sphere": { name: "Сфера тьмы", description: "Сфера тьмы" },
             "eternity-sphere": { name: "Сфера вечности", description: "Сфера вечности" },
+            "heart-sphere": { name: "Сфера сердца", description: "Сфера сердца" },
             "error-sphere": { name: "Сфера ERROR", description: "Сфера ERROR" },
             "hacker-sphere": { name: "Сфера HACKER", description: "Сфера HACKER" },
             "sun-sphere": { name: "Сфера солнца", description: "Сфера солнца" },
+            "unknown-sphere": { name: "Сфера неизвестности", description: "Сфера неизвестности" },
+            "cosmos-sphere": { name: "Сфера космоса", description: "Сфера космоса" },
+            "glitch-sphere": { name: "Сфера глитча", description: "Сфера глитча" },
             "glitch-fragment": { name: "Глитч фрагмент", description: "Фрагмент глитча" },
             "diamond": { name: "Алмаз", description: "Ценный алмаз" },
             "big-common-sphere": { name: "Большая обычная сфера", description: "Большая сфера обычного слова" },
@@ -607,7 +615,7 @@
             "hot-piggy-bank": { name: "Горячая копилка", description: "Даёт 10000-35000 монет" }
         };
 
-        // Рецепты крафта
+        // Рецепты крафта - исправлены ID предметов
         const craftingRecipes = [
             {
                 id: 1,
@@ -968,16 +976,18 @@
             for (const itemId in gameState.inventory) {
                 if (gameState.inventory[itemId] > 0 && slotIndex < 20) {
                     const item = itemsData[itemId];
-                    const slot = inventoryItemsElement.children[slotIndex];
-                    slot.className = 'inventory-slot';
-                    slot.innerHTML = `
-                        <div>${item.name}</div>
-                        <div class="item-count">${gameState.inventory[itemId]}</div>
-                        ${itemId.includes('sphere') || itemId.includes('bank') || itemId.includes('cube') ? 
-                            `<button class="activate-button" data-item="${itemId}">Активировать</button>` : ''
-                        }
-                    `;
-                    slotIndex++;
+                    if (item) { // Проверяем, существует ли предмет
+                        const slot = inventoryItemsElement.children[slotIndex];
+                        slot.className = 'inventory-slot';
+                        slot.innerHTML = `
+                            <div>${item.name}</div>
+                            <div class="item-count">${gameState.inventory[itemId]}</div>
+                            ${itemId.includes('sphere') || itemId.includes('bank') || itemId.includes('cube') ? 
+                                `<button class="activate-button" data-item="${itemId}">Активировать</button>` : ''
+                            }
+                        `;
+                        slotIndex++;
+                    }
                 }
             }
             
@@ -1061,18 +1071,26 @@
                 recipeElement.className = 'recipe';
                 
                 let ingredientsHTML = '';
+                let canCraft = true;
+                
                 recipe.ingredients.forEach(ing => {
                     const item = itemsData[ing.id];
                     const hasEnough = gameState.inventory[ing.id] >= ing.count;
-                    ingredientsHTML += `
-                        <div style="color: ${hasEnough ? 'green' : 'red'}">
-                            ${item.name} x${ing.count} ${hasEnough ? '✓' : '✗'}
-                        </div>
-                    `;
+                    if (!hasEnough) canCraft = false;
+                    
+                    if (item) {
+                        ingredientsHTML += `
+                            <div style="color: ${hasEnough ? 'green' : 'red'}">
+                                ${item.name} x${ing.count} ${hasEnough ? '✓' : '✗'}
+                            </div>
+                        `;
+                    }
                 });
                 
                 if (recipe.requiresFlask) {
                     const hasFlask = gameState.inventory['flask'] >= 1;
+                    if (!hasFlask) canCraft = false;
+                    
                     ingredientsHTML += `
                         <div style="color: ${hasFlask ? 'green' : 'red'}">
                             Колба x1 ${hasFlask ? '✓' : '✗'}
@@ -1080,16 +1098,15 @@
                     `;
                 }
                 
-                const canCraft = recipe.ingredients.every(ing => 
-                    gameState.inventory[ing.id] >= ing.count
-                ) && (!recipe.requiresFlask || gameState.inventory['flask'] >= 1);
-                
-                recipeElement.innerHTML = `
-                    <div class="recipe-title">${recipe.name}</div>
-                    <div class="recipe-ingredients">${ingredientsHTML}</div>
-                    <div class="recipe-result">Результат: ${itemsData[recipe.result.id].name} x${recipe.result.count}</div>
-                    <button class="craft-button" data-recipe="${recipe.id}" ${!canCraft ? 'disabled' : ''}>Создать</button>
-                `;
+                const resultItem = itemsData[recipe.result.id];
+                if (resultItem) {
+                    recipeElement.innerHTML = `
+                        <div class="recipe-title">${recipe.name}</div>
+                        <div class="recipe-ingredients">${ingredientsHTML}</div>
+                        <div class="recipe-result">Результат: ${resultItem.name} x${recipe.result.count}</div>
+                        <button class="craft-button" data-recipe="${recipe.id}" ${!canCraft ? 'disabled' : ''}>Создать</button>
+                    `;
+                }
                 
                 craftingRecipesElement.appendChild(recipeElement);
             });
