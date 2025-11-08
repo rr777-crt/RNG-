@@ -560,968 +560,1267 @@
     </div>
 
     <script>
-        // Данные о словах
-        const wordsData = [
-            { name: "обычный", rarity: "common", chance: 1/3, coins: 1, price: 100 },
-            { name: "необычный", rarity: "uncommon", chance: 1/5, coins: 3, price: 250 },
-            { name: "редкий", rarity: "rare", chance: 1/7, coins: 5, price: 500 },
-            { name: "повышенный", rarity: "improved", chance: 1/10, coins: 7, price: 1000 },
-            { name: "эпик", rarity: "epic", chance: 1/15, coins: 10, price: 2000 },
-            { name: "легендарный", rarity: "legendary", chance: 1/20, coins: 15, price: 3500 },
-            { name: "мифический", rarity: "mythical", chance: 1/35, coins: 25, price: 5000 },
-            { name: "тень/свет", rarity: "shadow-light", chance: 1/50, coins: 40, price: 10000 },
-            { name: "фиолетовый", rarity: "purple", chance: 1/75, coins: 50, price: 20000 },
-            { name: "КОРОЛЬ", rarity: "king", chance: 1/100, coins: 75, price: 25000 },
-            { name: "АНГЕЛ", rarity: "angel", chance: 1/200, coins: 100, price: 35000 },
-            { name: "МЕГА", rarity: "mega", chance: 1/325, coins: 125, price: 50000 },
-            { name: "БОЖЕСТВЕННЫЙ", rarity: "divine", chance: 1/500, coins: 250, price: 100000 },
-            { name: "тьма", rarity: "darkness", chance: 1/1666, coins: 666, price: 250000 },
-            { name: "ВЕЧНОСТЬ", rarity: "eternity", chance: 1/3000, coins: 1333, price: 500000 },
-            { name: "СЕРДЦЕ", rarity: "heart", chance: 1/6666, coins: 1666, price: 750000 },
-            { name: "ERROR", rarity: "error", chance: 1/9999, coins: 1999, price: 1000000 },
-            { name: "HACKER", rarity: "hacker", chance: 1/11010, coins: 2111, price: 1500000 },
-            { name: "СОЛНЦЕ", rarity: "sun", chance: 1/15000, coins: 2500, price: 2000000 },
-            { name: "Н Е И З В Е С Т Н О", rarity: "unknown", chance: 1/22222, coins: 3456, price: 3000000 },
-            { name: "К О С М О С", rarity: "cosmos", chance: 1/35000, coins: 7777, price: 5000000 },
-            { name: "GLITCH", rarity: "glitch", chance: 0, coins: 1404, price: 0 } // Шанс 0, так как выпадает только через глитч куб
-        ];
+       // Данные о словах
+const wordsData = [
+    { name: "обычный", rarity: "common", chance: 1/3, coins: 1, price: 100 },
+    { name: "необычный", rarity: "uncommon", chance: 1/5, coins: 3, price: 250 },
+    { name: "редкий", rarity: "rare", chance: 1/7, coins: 5, price: 500 },
+    { name: "повышенный", rarity: "improved", chance: 1/10, coins: 7, price: 1000 },
+    { name: "эпик", rarity: "epic", chance: 1/15, coins: 10, price: 2000 },
+    { name: "легендарный", rarity: "legendary", chance: 1/20, coins: 15, price: 3500 },
+    { name: "мифический", rarity: "mythical", chance: 1/35, coins: 25, price: 5000 },
+    { name: "тень/свет", rarity: "shadow-light", chance: 1/50, coins: 40, price: 10000 },
+    { name: "фиолетовый", rarity: "purple", chance: 1/75, coins: 50, price: 20000 },
+    { name: "КОРОЛЬ", rarity: "king", chance: 1/100, coins: 75, price: 25000 },
+    { name: "АНГЕЛ", rarity: "angel", chance: 1/200, coins: 100, price: 35000 },
+    { name: "МЕГА", rarity: "mega", chance: 1/325, coins: 125, price: 50000 },
+    { name: "БОЖЕСТВЕННЫЙ", rarity: "divine", chance: 1/500, coins: 250, price: 100000 },
+    { name: "тьма", rarity: "darkness", chance: 1/1666, coins: 666, price: 250000 },
+    { name: "ВЕЧНОСТЬ", rarity: "eternity", chance: 1/3000, coins: 1333, price: 500000 },
+    { name: "СЕРДЦЕ", rarity: "heart", chance: 1/6666, coins: 1666, price: 750000 },
+    { name: "ERROR", rarity: "error", chance: 1/9999, coins: 1999, price: 1000000 },
+    { name: "HACKER", rarity: "hacker", chance: 1/11010, coins: 2111, price: 1500000 },
+    { name: "СОЛНЦЕ", rarity: "sun", chance: 1/15000, coins: 2500, price: 2000000 },
+    { name: "Н Е И З В Е С Т Н О", rarity: "unknown", chance: 1/22222, coins: 3456, price: 3000000 },
+    { name: "К О С М О С", rarity: "cosmos", chance: 1/35000, coins: 7777, price: 5000000 },
+    { name: "GLITCH", rarity: "glitch", chance: 0, coins: 1404, price: 0 }
+];
 
-        // Данные о предметах - добавлены все недостающие сферы
-        const itemsData = {
-            "flask": { name: "Колба", description: "Необходима для крафта" },
-            "common-sphere": { name: "Обычная сфера", description: "Сфера обычного слова", craftOnly: true },
-            "uncommon-sphere": { name: "Необычная сфера", description: "Сфера необычного слова", craftOnly: true },
-            "rare-sphere": { name: "Редкая сфера", description: "Сфера редкого слова", craftOnly: true },
-            "epic-sphere": { name: "Эпик сфера", description: "Сфера эпик слова", craftOnly: true },
-            "legendary-sphere": { name: "Легендарная сфера", description: "Сфера легендарного слова", craftOnly: true },
-            "mythical-sphere": { name: "Мифическая сфера", description: "Сфера мифического слова", craftOnly: true },
-            "shadow-light-sphere": { name: "Сфера тени/света", description: "Сфера тени/света", craftOnly: true },
-            "purple-sphere": { name: "Фиолетовая сфера", description: "Сфера фиолетового слова", craftOnly: true },
-            "king-sphere": { name: "Сфера короля", description: "Сфера короля", craftOnly: true },
-            "angel-sphere": { name: "Сфера ангела", description: "Сфера ангела", craftOnly: true },
-            "mega-sphere": { name: "Сфера мега", description: "Сфера мега", craftOnly: true },
-            "divine-sphere": { name: "Божественная сфера", description: "Сфера божественного слова", craftOnly: true },
-            "darkness-sphere": { name: "Сфера тьмы", description: "Сфера тьмы", craftOnly: true },
-            "eternity-sphere": { name: "Сфера вечности", description: "Сфера вечности", craftOnly: true },
-            "heart-sphere": { name: "Сфера сердца", description: "Сфера сердца", craftOnly: true },
-            "error-sphere": { name: "Сфера ERROR", description: "Сфера ERROR", craftOnly: true },
-            "hacker-sphere": { name: "Сфера HACKER", description: "Сфера HACKER", craftOnly: true },
-            "sun-sphere": { name: "Сфера солнца", description: "Сфера солнца", craftOnly: true },
-            "unknown-sphere": { name: "Сфера неизвестности", description: "Сфера неизвестности", craftOnly: true },
-            "cosmos-sphere": { name: "Сфера космоса", description: "Сфера космоса", craftOnly: true },
-            "glitch-sphere": { name: "Сфера глитча", description: "Сфера глитча", craftOnly: true },
-            "glitch-fragment": { name: "Глитч фрагмент", description: "Фрагмент глитча" },
-            "diamond": { name: "Алмаз", description: "Ценный алмаз" },
-            "big-common-sphere": { name: "Большая обычная сфера", description: "Большая сфера обычного слова", craftOnly: true },
-            "big-uncommon-sphere": { name: "Большая необычная сфера", description: "Большая сфера необычного слова", craftOnly: true },
-            "luck-sphere": { name: "Сфера удачи", description: "Следующие 5 прокруток имеют 100% шанс на сферу" },
-            "piggy-bank": { name: "Копилка", description: "Даёт 50-125 монет" },
-            "coin-sphere": { name: "Сфера монет", description: "На 1 мин зарабатывать на 50% больше монет" },
-            "glitch-cube": { name: "Глитч куб", description: "Следующая прокрутка 100% шанс на GLITCH" },
-            "cheat-sphere": { name: "Сфера читов", description: "Выпадает случайный предмет и след. 10 прокруток +100% монет" },
-            "diamond-sphere": { name: "Алмазная сфера", description: "Выпадает 15-30 копилок" },
-            "god-sphere": { name: "Сфера бога", description: "На 2 мин 100% шанс на сферы" },
-            "hot-piggy-bank": { name: "Горячая копилка", description: "Даёт 10000-35000 монет" }
-        };
+// Данные о предметах
+const itemsData = {
+    "flask": { name: "Колба", description: "Необходима для крафта" },
+    "common-sphere": { name: "Обычная сфера", description: "Сфера обычного слова" },
+    "uncommon-sphere": { name: "Необычная сфера", description: "Сфера необычного слова" },
+    "rare-sphere": { name: "Редкая сфера", description: "Сфера редкого слова" },
+    "epic-sphere": { name: "Эпик сфера", description: "Сфера эпик слова" },
+    "legendary-sphere": { name: "Легендарная сфера", description: "Сфера легендарного слова" },
+    "mythical-sphere": { name: "Мифическая сфера", description: "Сфера мифического слова" },
+    "shadow-light-sphere": { name: "Сфера тени/света", description: "Сфера тени/света" },
+    "purple-sphere": { name: "Фиолетовая сфера", description: "Сфера фиолетового слова" },
+    "king-sphere": { name: "Сфера короля", description: "Сфера короля" },
+    "angel-sphere": { name: "Сфера ангела", description: "Сфера ангела" },
+    "mega-sphere": { name: "Сфера мега", description: "Сфера мега" },
+    "divine-sphere": { name: "Божественная сфера", description: "Сфера божественного слова" },
+    "darkness-sphere": { name: "Сфера тьмы", description: "Сфера тьмы" },
+    "eternity-sphere": { name: "Сфера вечности", description: "Сфера вечности" },
+    "heart-sphere": { name: "Сфера сердца", description: "Сфера сердца" },
+    "error-sphere": { name: "Сфера ERROR", description: "Сфера ERROR" },
+    "hacker-sphere": { name: "Сфера HACKER", description: "Сфера HACKER" },
+    "sun-sphere": { name: "Сфера солнца", description: "Сфера солнца" },
+    "unknown-sphere": { name: "Сфера неизвестности", description: "Сфера неизвестности" },
+    "cosmos-sphere": { name: "Сфера космоса", description: "Сфера космоса" },
+    "glitch-sphere": { name: "Сфера глитча", description: "Сфера глитча" },
+    "glitch-fragment": { name: "Глитч фрагмент", description: "Фрагмент глитча" },
+    "diamond": { name: "Алмаз", description: "Ценный алмаз" },
+    "big-common-sphere": { name: "Большая обычная сфера", description: "Большая сфера обычного слова" },
+    "big-uncommon-sphere": { name: "Большая необычная сфера", description: "Большая сфера необычного слова" },
+    "luck-sphere": { name: "Сфера удачи", description: "Следующие 5 прокруток имеют 100% шанс на сферу" },
+    "piggy-bank": { name: "Копилка", description: "Даёт 50-125 монет" },
+    "coin-sphere": { name: "Сфера монет", description: "На 1 мин зарабатывать на 50% больше монет" },
+    "glitch-cube": { name: "Глитч куб", description: "Следующая прокрутка 100% шанс на GLITCH" },
+    "cheat-sphere": { name: "Сфера читов", description: "Выпадает случайный предмет и след. 10 прокруток +100% монет" },
+    "diamond-sphere": { name: "Алмазная сфера", description: "Выпадает 15-30 копилок" },
+    "god-sphere": { name: "Сфера бога", description: "На 2 мин 100% шанс на сферы" },
+    "hot-piggy-bank": { name: "Горячая копилка", description: "Даёт 10000-35000 монет" }
+};
 
-        // Рецепты крафта - исправлены ID предметов
-        const craftingRecipes = [
-            {
-                id: 1,
-                name: "Большая обычная сфера",
-                ingredients: [
-                    { id: "common-sphere", count: 5 }
-                ],
-                result: { id: "big-common-sphere", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 2,
-                name: "Большая необычная сфера",
-                ingredients: [
-                    { id: "uncommon-sphere", count: 5 }
-                ],
-                result: { id: "big-uncommon-sphere", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 3,
-                name: "Сфера удачи",
-                ingredients: [
-                    { id: "big-uncommon-sphere", count: 1 },
-                    { id: "big-common-sphere", count: 1 }
-                ],
-                result: { id: "luck-sphere", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 4,
-                name: "Копилка",
-                ingredients: [
-                    { id: "rare-sphere", count: 2 },
-                    { id: "epic-sphere", count: 1 },
-                    { id: "legendary-sphere", count: 1 }
-                ],
-                result: { id: "piggy-bank", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 5,
-                name: "Сфера монет",
-                ingredients: [
-                    { id: "epic-sphere", count: 1 },
-                    { id: "mythical-sphere", count: 2 },
-                    { id: "legendary-sphere", count: 2 },
-                    { id: "shadow-light-sphere", count: 5 }
-                ],
-                result: { id: "coin-sphere", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 6,
-                name: "Глитч куб",
-                ingredients: [
-                    { id: "glitch-fragment", count: 5 },
-                    { id: "divine-sphere", count: 1 },
-                    { id: "darkness-sphere", count: 1 },
-                    { id: "angel-sphere", count: 2 },
-                    { id: "eternity-sphere", count: 1 }
-                ],
-                result: { id: "glitch-cube", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 7,
-                name: "Сфера читов",
-                ingredients: [
-                    { id: "glitch-sphere", count: 1 },
-                    { id: "error-sphere", count: 1 },
-                    { id: "hacker-sphere", count: 1 }
-                ],
-                result: { id: "cheat-sphere", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 8,
-                name: "Алмазная сфера",
-                ingredients: [
-                    { id: "diamond", count: 10 },
-                    { id: "rare-sphere", count: 1 }
-                ],
-                result: { id: "diamond-sphere", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 9,
-                name: "Сфера бога",
-                ingredients: [
-                    { id: "divine-sphere", count: 2 },
-                    { id: "angel-sphere", count: 3 },
-                    { id: "eternity-sphere", count: 1 }
-                ],
-                result: { id: "god-sphere", count: 1 },
-                requiresFlask: true
-            },
-            {
-                id: 10,
-                name: "Горячая копилка",
-                ingredients: [
-                    { id: "sun-sphere", count: 1 },
-                    { id: "legendary-sphere", count: 20 }
-                ],
-                result: { id: "hot-piggy-bank", count: 1 },
-                requiresFlask: true
+// Рецепты крафта
+const craftingRecipes = [
+    {
+        id: 1,
+        name: "Большая обычная сфера",
+        ingredients: [
+            { id: "common-sphere", count: 5 }
+        ],
+        result: { id: "big-common-sphere", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 2,
+        name: "Большая необычная сфера",
+        ingredients: [
+            { id: "uncommon-sphere", count: 5 }
+        ],
+        result: { id: "big-uncommon-sphere", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 3,
+        name: "Сфера удачи",
+        ingredients: [
+            { id: "big-uncommon-sphere", count: 1 },
+            { id: "big-common-sphere", count: 1 }
+        ],
+        result: { id: "luck-sphere", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 4,
+        name: "Копилка",
+        ingredients: [
+            { id: "rare-sphere", count: 2 },
+            { id: "epic-sphere", count: 1 },
+            { id: "legendary-sphere", count: 1 }
+        ],
+        result: { id: "piggy-bank", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 5,
+        name: "Сфера монет",
+        ingredients: [
+            { id: "epic-sphere", count: 1 },
+            { id: "mythical-sphere", count: 2 },
+            { id: "legendary-sphere", count: 2 },
+            { id: "shadow-light-sphere", count: 5 }
+        ],
+        result: { id: "coin-sphere", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 6,
+        name: "Глитч куб",
+        ingredients: [
+            { id: "glitch-fragment", count: 5 },
+            { id: "divine-sphere", count: 1 },
+            { id: "darkness-sphere", count: 1 },
+            { id: "angel-sphere", count: 2 },
+            { id: "eternity-sphere", count: 1 }
+        ],
+        result: { id: "glitch-cube", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 7,
+        name: "Сфера читов",
+        ingredients: [
+            { id: "glitch-sphere", count: 1 },
+            { id: "error-sphere", count: 1 },
+            { id: "hacker-sphere", count: 1 }
+        ],
+        result: { id: "cheat-sphere", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 8,
+        name: "Алмазная сфера",
+        ingredients: [
+            { id: "diamond", count: 10 },
+            { id: "rare-sphere", count: 1 }
+        ],
+        result: { id: "diamond-sphere", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 9,
+        name: "Сфера бога",
+        ingredients: [
+            { id: "divine-sphere", count: 2 },
+            { id: "angel-sphere", count: 3 },
+            { id: "eternity-sphere", count: 1 }
+        ],
+        result: { id: "god-sphere", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 10,
+        name: "Горячая копилка",
+        ingredients: [
+            { id: "sun-sphere", count: 1 },
+            { id: "legendary-sphere", count: 20 }
+        ],
+        result: { id: "hot-piggy-bank", count: 1 },
+        requiresFlask: true
+    }
+];
+
+// Состояние игры
+let gameState = {
+    coins: 1000,
+    cooldown: 5,
+    unlockedWords: {},
+    removedWords: {},
+    claimedWords: {},
+    inventory: {
+        "common-sphere": 10,
+        "uncommon-sphere": 8,
+        "rare-sphere": 5,
+        "flask": 5
+    },
+    activeEffects: {},
+    spinInProgress: false,
+    purchasedRemovals: {}
+};
+
+// Элементы DOM
+const coinCountElement = document.getElementById('coin-count');
+const spinButton = document.getElementById('spin-button');
+const resultElement = document.getElementById('result');
+const shopItemsElement = document.getElementById('shop-items');
+const libraryItemsElement = document.getElementById('library-items');
+const inventoryItemsElement = document.getElementById('inventory-items');
+const craftingRecipesElement = document.getElementById('crafting-recipes');
+
+// Инициализация игры
+function initGame() {
+    loadGameState();
+    updateUI();
+    createShopItems();
+    createLibraryItems();
+    createInventory();
+    createCraftingRecipes();
+    
+    // Обработчик для кнопки вращения
+    spinButton.addEventListener('click', spin);
+    
+    // Обработчики для вкладок
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.dataset.tab;
+            switchTab(tabId);
+        });
+    });
+}
+
+// Переключение вкладок
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.getElementById(`${tabId}-tab`).classList.add('active');
+    document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+}
+
+// Загрузка состояния игры из localStorage
+function loadGameState() {
+    const savedState = localStorage.getItem('rngPlusFullGame');
+    if (savedState) {
+        try {
+            const parsedState = JSON.parse(savedState);
+            gameState = { ...gameState, ...parsedState };
+            
+            if (gameState.spinInProgress) {
+                startCooldown();
+            } else {
+                spinButton.disabled = false;
+                spinButton.textContent = 'Крутить';
             }
-        ];
-
-        // Состояние игры
-        let gameState = {
-            coins: 0,
-            cooldown: 5,
-            unlockedWords: {},
-            removedWords: {},
-            claimedWords: {},
-            inventory: {},
-            activeEffects: {},
-            spinInProgress: false,
-            purchasedRemovals: {} // Новое поле для отслеживания купленных удалений
-        };
-
-        // Элементы DOM
-        const coinCountElement = document.getElementById('coin-count');
-        const spinButton = document.getElementById('spin-button');
-        const resultElement = document.getElementById('result');
-        const shopItemsElement = document.getElementById('shop-items');
-        const libraryItemsElement = document.getElementById('library-items');
-        const inventoryItemsElement = document.getElementById('inventory-items');
-        const craftingRecipesElement = document.getElementById('crafting-recipes');
-
-        // Инициализация игры
-        function initGame() {
-            loadGameState();
-            updateUI();
-            createShopItems();
-            createLibraryItems();
-            createInventory();
-            createCraftingRecipes();
-            
-            // Обработчик для кнопки вращения
-            spinButton.addEventListener('click', spin);
-            
-            // Обработчики для вкладок
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const tabId = tab.dataset.tab;
-                    switchTab(tabId);
-                });
-            });
+        } catch (e) {
+            console.error('Ошибка загрузки сохранения:', e);
         }
+    }
+}
 
-        // Переключение вкладок
-        function switchTab(tabId) {
-            // Скрыть все вкладки
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Убрать активный класс со всех вкладок
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Показать выбранную вкладку
-            document.getElementById(`${tabId}-tab`).classList.add('active');
-            document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
-        }
+// Сохранение состояния игры в localStorage
+function saveGameState() {
+    try {
+        localStorage.setItem('rngPlusFullGame', JSON.stringify(gameState));
+    } catch (e) {
+        console.error('Ошибка сохранения:', e);
+    }
+}
 
-        // Загрузка состояния игры из localStorage
-        function loadGameState() {
-            const savedState = localStorage.getItem('rngPlusFullGame');
-            if (savedState) {
-                try {
-                    const parsedState = JSON.parse(savedState);
-                    // Объединяем сохраненное состояние с текущим, чтобы сохранить структуру
-                    gameState = { ...gameState, ...parsedState };
-                    
-                    // Восстанавливаем состояние кнопки после загрузки
-                    if (gameState.spinInProgress) {
-                        startCooldown();
-                    } else {
-                        spinButton.disabled = false;
-                        spinButton.textContent = 'Крутить';
-                    }
-                } catch (e) {
-                    console.error('Ошибка загрузки сохранения:', e);
-                }
-            }
-        }
+// Обновление интерфейса
+function updateUI() {
+    coinCountElement.textContent = gameState.coins;
+    createLibraryItems();
+    createInventory();
+}
 
-        // Сохранение состояния игры в localStorage
-        function saveGameState() {
-            try {
-                localStorage.setItem('rngPlusFullGame', JSON.stringify(gameState));
-            } catch (e) {
-                console.error('Ошибка сохранения:', e);
-            }
-        }
-
-        // Обновление интерфейса
-        function updateUI() {
-            coinCountElement.textContent = gameState.coins;
+// Создание элементов магазина
+function createShopItems() {
+    shopItemsElement.innerHTML = '';
+    
+    // Добавление улучшения перезарядки
+    const cooldownItem = document.createElement('div');
+    cooldownItem.className = 'shop-item';
+    const canBuyCooldown = gameState.cooldown > 0.5;
+    cooldownItem.innerHTML = `
+        <span>-0.5 к перезарядке (текущая: ${gameState.cooldown}с)</span>
+        <button class="buy-button" data-type="cooldown" data-price="25" ${!canBuyCooldown ? 'disabled' : ''}>25 монет</button>
+    `;
+    shopItemsElement.appendChild(cooldownItem);
+    
+    // Добавление предметов магазина
+    const shopItems = [
+        { name: "Глитч артефакт", type: "item", id: "glitch-fragment", price: 404 },
+        { name: "Алмаз", type: "item", id: "diamond", price: 1000 },
+        { name: "Скин на кнопку красный", type: "skin", id: "red-button", price: 125 },
+        { name: "Купол", type: "item", id: "flask", price: 50 }
+    ];
+    
+    shopItems.forEach(item => {
+        const shopItem = document.createElement('div');
+        shopItem.className = 'shop-item';
+        shopItem.innerHTML = `
+            <span>${item.name}</span>
+            <button class="buy-button" data-type="${item.type}" data-id="${item.id}" data-price="${item.price}">${item.price} монет</button>
+        `;
+        shopItemsElement.appendChild(shopItem);
+    });
+    
+    // Добавление кнопок удаления слов
+    wordsData.forEach(word => {
+        if (!['error', 'hacker', 'sun', 'unknown'].includes(word.rarity)) {
+            const isPurchased = gameState.purchasedRemovals[word.rarity];
+            const isActive = gameState.removedWords[word.rarity];
             
-            // Обновление библиотеки
-            createLibraryItems();
+            const shopItem = document.createElement('div');
+            shopItem.className = 'shop-item';
             
-            // Обновление инвентаря
-            createInventory();
-        }
-
-        // Создание элементов магазина
-        function createShopItems() {
-            shopItemsElement.innerHTML = '';
-            
-            // Добавление улучшения перезарядки
-            const cooldownItem = document.createElement('div');
-            cooldownItem.className = 'shop-item';
-            const canBuyCooldown = gameState.cooldown > 0.5;
-            cooldownItem.innerHTML = `
-                <span>-0.5 к перезарядке (текущая: ${gameState.cooldown}с)</span>
-                <button class="buy-button" data-type="cooldown" data-price="25" ${!canBuyCooldown ? 'disabled' : ''}>25 монет</button>
-            `;
-            shopItemsElement.appendChild(cooldownItem);
-            
-            // Добавление предметов магазина
-            const shopItems = [
-                { name: "Глитч артефакт", type: "item", id: "glitch-fragment", price: 404 },
-                { name: "Алмаз", type: "item", id: "diamond", price: 1000 },
-                { name: "Скин на кнопку красный", type: "skin", id: "red-button", price: 125 },
-                { name: "Купол", type: "item", id: "flask", price: 50 }
-            ];
-            
-            shopItems.forEach(item => {
-                const shopItem = document.createElement('div');
-                shopItem.className = 'shop-item';
+            if (isPurchased) {
                 shopItem.innerHTML = `
-                    <span>${item.name}</span>
-                    <button class="buy-button" data-type="${item.type}" data-id="${item.id}" data-price="${item.price}">${item.price} монет</button>
-                `;
-                shopItemsElement.appendChild(shopItem);
-            });
-            
-            // Добавление кнопок удаления слов
-            wordsData.forEach(word => {
-                // Показываем только если слово не ERROR, HACKER, СОЛНЦЕ и НЕИЗВЕСТНО
-                if (!['error', 'hacker', 'sun', 'unknown'].includes(word.rarity)) {
-                    const isPurchased = gameState.purchasedRemovals[word.rarity];
-                    const isActive = gameState.removedWords[word.rarity];
-                    
-                    const shopItem = document.createElement('div');
-                    shopItem.className = 'shop-item';
-                    
-                    if (isPurchased) {
-                        // Если уже куплено, показываем кнопку переключения
-                        shopItem.innerHTML = `
-                            <span>Удалить ${word.name} - ${isActive ? 'ВКЛ' : 'ВЫКЛ'}</span>
-                            <div>
-                                <button class="toggle-button ${isActive ? 'active' : ''}" data-rarity="${word.rarity}">
-                                    ${isActive ? 'Включено' : 'Выключено'}
-                                </button>
-                            </div>
-                        `;
-                    } else {
-                        // Если не куплено, показываем кнопку покупки
-                        shopItem.innerHTML = `
-                            <span>Удалить ${word.name}</span>
-                            <button class="buy-button" data-type="remove" data-rarity="${word.rarity}" data-price="${word.price}">${word.price} монет</button>
-                        `;
-                    }
-                    
-                    shopItemsElement.appendChild(shopItem);
-                }
-            });
-            
-            // Добавление обработчиков для кнопок покупки
-            document.querySelectorAll('.buy-button').forEach(button => {
-                button.addEventListener('click', handlePurchase);
-            });
-            
-            // Добавление обработчиков для кнопок переключения
-            document.querySelectorAll('.toggle-button').forEach(button => {
-                button.addEventListener('click', toggleRemoval);
-            });
-        }
-
-        // Переключение состояния удаления слова
-        function toggleRemoval(event) {
-            const button = event.target;
-            const rarity = button.dataset.rarity;
-            
-            // Переключаем состояние
-            gameState.removedWords[rarity] = !gameState.removedWords[rarity];
-            
-            updateUI();
-            createShopItems();
-            saveGameState();
-        }
-
-        // Обработка покупки в магазине
-        function handlePurchase(event) {
-            const button = event.target;
-            const type = button.dataset.type;
-            const price = parseInt(button.dataset.price);
-            
-            if (gameState.coins < price) {
-                alert('Недостаточно монет!');
-                return;
-            }
-            
-            if (type === 'cooldown') {
-                gameState.cooldown = Math.max(0.5, gameState.cooldown - 0.5);
-                gameState.coins -= price;
-            } else if (type === 'item') {
-                const itemId = button.dataset.id;
-                gameState.coins -= price;
-                addToInventory(itemId, 1);
-            } else if (type === 'skin') {
-                gameState.coins -= price;
-                // Применение скина
-                if (button.dataset.id === 'red-button') {
-                    spinButton.style.background = '#e74c3c';
-                }
-            } else if (type === 'remove') {
-                const rarity = button.dataset.rarity;
-                gameState.coins -= price;
-                // Покупаем возможность удаления и включаем его по умолчанию
-                gameState.purchasedRemovals[rarity] = true;
-                gameState.removedWords[rarity] = true;
-            }
-            
-            updateUI();
-            createShopItems(); // Обновляем магазин после покупки
-            saveGameState();
-        }
-
-        // Добавление предмета в инвентарь
-        function addToInventory(itemId, count) {
-            if (!gameState.inventory[itemId]) {
-                gameState.inventory[itemId] = 0;
-            }
-            gameState.inventory[itemId] += count;
-        }
-
-        // Создание элементов библиотеки
-        function createLibraryItems() {
-            libraryItemsElement.innerHTML = '';
-            
-            wordsData.forEach(word => {
-                const isUnlocked = gameState.unlockedWords[word.rarity];
-                const isRemoved = gameState.removedWords[word.rarity];
-                const isClaimed = gameState.claimedWords[word.rarity];
-                
-                const item = document.createElement('div');
-                item.className = 'library-item';
-                
-                // Пересчет шансов с учетом удаленных слов
-                let totalChance = 0;
-                wordsData.forEach(w => {
-                    if (!gameState.removedWords[w.rarity] && w.rarity !== 'glitch') {
-                        totalChance += w.chance;
-                    }
-                });
-                
-                let chancePercent = '???';
-                if (isUnlocked && !isRemoved) {
-                    chancePercent = ((word.chance / totalChance) * 100).toFixed(4) + '%';
-                } else if (isRemoved) {
-                    chancePercent = '0% (удалено)';
-                }
-                
-                const bonusCoins = word.coins * 2;
-                
-                item.innerHTML = `
+                    <span>Удалить ${word.name} - ${isActive ? 'ВКЛ' : 'ВЫКЛ'}</span>
                     <div>
-                        <span class="${word.rarity}">${word.name}</span>
-                        <span> - ${chancePercent}</span>
-                    </div>
-                    <div>
-                        ${isUnlocked && !isClaimed ? 
-                            `<button class="claim-button" data-rarity="${word.rarity}" data-coins="${bonusCoins}">Забрать ${bonusCoins} монет</button>` : 
-                            (isClaimed ? '<span>ЗАВЕРШЁННЫЙ</span>' : '<span>Неизвестно</span>')
-                        }
+                        <button class="toggle-button ${isActive ? 'active' : ''}" data-rarity="${word.rarity}">
+                            ${isActive ? 'Включено' : 'Выключено'}
+                        </button>
                     </div>
                 `;
-                
-                libraryItemsElement.appendChild(item);
-            });
-            
-            // Добавление обработчиков для кнопок получения бонуса
-            document.querySelectorAll('.claim-button').forEach(button => {
-                button.addEventListener('click', claimBonus);
-            });
-        }
-
-        // Получение бонуса за новое слово
-        function claimBonus(event) {
-            const button = event.target;
-            const rarity = button.dataset.rarity;
-            const coins = parseInt(button.dataset.coins);
-            
-            gameState.coins += coins;
-            gameState.claimedWords[rarity] = true;
-            
-            updateUI();
-            saveGameState();
-        }
-
-        // Создание инвентаря
-        function createInventory() {
-            inventoryItemsElement.innerHTML = '';
-            
-            // Создаем 20 слотов инвентаря
-            for (let i = 0; i < 20; i++) {
-                const slot = document.createElement('div');
-                slot.className = 'inventory-slot empty';
-                slot.innerHTML = 'Пусто';
-                inventoryItemsElement.appendChild(slot);
-            }
-            
-            // Заполняем слоты предметами
-            let slotIndex = 0;
-            for (const itemId in gameState.inventory) {
-                if (gameState.inventory[itemId] > 0 && slotIndex < 20) {
-                    const item = itemsData[itemId];
-                    if (item) { // Проверяем, существует ли предмет
-                        const slot = inventoryItemsElement.children[slotIndex];
-                        slot.className = 'inventory-slot';
-                        
-                        // Показываем кнопку активации только для предметов, которые можно активировать
-                        const showActivateButton = !item.craftOnly && 
-                            (itemId.includes('sphere') || itemId.includes('bank') || itemId.includes('cube'));
-                        
-                        slot.innerHTML = `
-                            <div>${item.name}</div>
-                            <div class="item-count">${gameState.inventory[itemId]}</div>
-                            ${showActivateButton ? 
-                                `<button class="activate-button" data-item="${itemId}">Активировать</button>` : 
-                                '<div style="color: #7f8c8d; font-size: 0.8rem;">Только для крафта</div>'
-                            }
-                        `;
-                        slotIndex++;
-                    }
-                }
-            }
-            
-            // Добавление обработчиков для кнопок активации
-            document.querySelectorAll('.activate-button').forEach(button => {
-                button.addEventListener('click', activateItem);
-            });
-        }
-
-        // Активация предмета
-        function activateItem(event) {
-            const button = event.target;
-            const itemId = button.dataset.item;
-            
-            if (!gameState.inventory[itemId] || gameState.inventory[itemId] <= 0) return;
-            
-            // Уменьшаем количество предмета
-            gameState.inventory[itemId]--;
-            
-            // Применяем эффект предмета
-            applyItemEffect(itemId);
-            
-            updateUI();
-            saveGameState();
-        }
-
-        // Применение эффекта предмета
-        function applyItemEffect(itemId) {
-            switch(itemId) {
-                case 'luck-sphere':
-                    gameState.activeEffects.luckSpheres = 5;
-                    alert('Сфера удачи активирована! Следующие 5 прокруток дадут сферы!');
-                    break;
-                case 'piggy-bank':
-                    const piggyCoins = Math.floor(Math.random() * 76) + 50;
-                    gameState.coins += piggyCoins;
-                    alert(`Копилка активирована! Вы получили ${piggyCoins} монет!`);
-                    break;
-                case 'coin-sphere':
-                    gameState.activeEffects.coinBonus = true;
-                    gameState.activeEffects.coinBonusTime = Date.now() + 60000; // 1 минута
-                    alert('Сфера монет активирована! На 1 минуту вы получаете на 50% больше монет!');
-                    break;
-                case 'glitch-cube':
-                    gameState.activeEffects.glitchCube = true;
-                    alert('Глитч куб активирован! Следующая прокрутка даст слово GLITCH!');
-                    break;
-                case 'cheat-sphere':
-                    // Случайный предмет
-                    const itemIds = Object.keys(itemsData).filter(id => !itemsData[id].craftOnly);
-                    const randomItem = itemIds[Math.floor(Math.random() * itemIds.length)];
-                    addToInventory(randomItem, 1);
-                    
-                    gameState.activeEffects.cheatBonus = 10;
-                    alert(`Сфера читов активирована! Вы получили ${itemsData[randomItem].name} и следующие 10 прокруток дадут двойные монеты!`);
-                    break;
-                case 'diamond-sphere':
-                    const piggyCount = Math.floor(Math.random() * 16) + 15;
-                    addToInventory('piggy-bank', piggyCount);
-                    alert(`Алмазная сфера активирована! Вы получили ${piggyCount} копилок!`);
-                    break;
-                case 'god-sphere':
-                    gameState.activeEffects.godSpheres = true;
-                    gameState.activeEffects.godSpheresTime = Date.now() + 120000; // 2 минуты
-                    alert('Сфера бога активирована! На 2 минуты у вас 100% шанс на сферы!');
-                    break;
-                case 'hot-piggy-bank':
-                    const hotCoins = Math.floor(Math.random() * 25001) + 10000;
-                    gameState.coins += hotCoins;
-                    alert(`Горячая копилка активирована! Вы получили ${hotCoins} монет!`);
-                    break;
-            }
-        }
-
-        // Создание рецептов крафта
-        function createCraftingRecipes() {
-            craftingRecipesElement.innerHTML = '';
-            
-            craftingRecipes.forEach(recipe => {
-                const recipeElement = document.createElement('div');
-                recipeElement.className = 'recipe';
-                
-                let ingredientsHTML = '';
-                let canCraft = true;
-                
-                recipe.ingredients.forEach(ing => {
-                    const item = itemsData[ing.id];
-                    const hasEnough = gameState.inventory[ing.id] >= ing.count;
-                    if (!hasEnough) canCraft = false;
-                    
-                    if (item) {
-                        ingredientsHTML += `
-                            <div style="color: ${hasEnough ? 'green' : 'red'}">
-                                ${item.name} x${ing.count} ${hasEnough ? '✓' : '✗'}
-                            </div>
-                        `;
-                    }
-                });
-                
-                if (recipe.requiresFlask) {
-                    const hasFlask = gameState.inventory['flask'] >= 1;
-                    if (!hasFlask) canCraft = false;
-                    
-                    ingredientsHTML += `
-                        <div style="color: ${hasFlask ? 'green' : 'red'}">
-                            Колба x1 ${hasFlask ? '✓' : '✗'}
-                        </div>
-                    `;
-                }
-                
-                const resultItem = itemsData[recipe.result.id];
-                if (resultItem) {
-                    recipeElement.innerHTML = `
-                        <div class="recipe-title">${recipe.name}</div>
-                        <div class="recipe-ingredients">${ingredientsHTML}</div>
-                        <div class="recipe-result">Результат: ${resultItem.name} x${recipe.result.count}</div>
-                        <button class="craft-button" data-recipe="${recipe.id}" ${!canCraft ? 'disabled' : ''}>Создать</button>
-                    `;
-                }
-                
-                craftingRecipesElement.appendChild(recipeElement);
-            });
-            
-            // Добавление обработчиков для кнопок крафта
-            document.querySelectorAll('.craft-button').forEach(button => {
-                button.addEventListener('click', craftItem);
-            });
-        }
-
-        // Крафт предмета
-        function craftItem(event) {
-            const button = event.target;
-            const recipeId = parseInt(button.dataset.recipe);
-            const recipe = craftingRecipes.find(r => r.id === recipeId);
-            
-            if (!recipe) return;
-            
-            // Проверяем, есть ли все ингредиенты
-            const hasAllIngredients = recipe.ingredients.every(ing => 
-                gameState.inventory[ing.id] >= ing.count
-            ) && (!recipe.requiresFlask || gameState.inventory['flask'] >= 1);
-            
-            if (!hasAllIngredients) {
-                alert('Недостаточно ингредиентов для крафта!');
-                return;
-            }
-            
-            // Убираем ингредиенты
-            recipe.ingredients.forEach(ing => {
-                gameState.inventory[ing.id] -= ing.count;
-            });
-            
-            if (recipe.requiresFlask) {
-                gameState.inventory['flask'] -= 1;
-            }
-            
-            // Добавляем результат
-            addToInventory(recipe.result.id, recipe.result.count);
-            
-            alert(`Успешно создано: ${itemsData[recipe.result.id].name} x${recipe.result.count}`);
-            
-            updateUI();
-            createCraftingRecipes();
-            saveGameState();
-        }
-
-        // Вращение (получение случайного слова)
-        function spin() {
-            if (gameState.spinInProgress) return;
-            
-            gameState.spinInProgress = true;
-            spinButton.disabled = true;
-            
-            // Проверяем активные эффекты
-            let selectedWord = null;
-            
-            // Если активирован глитч куб
-            if (gameState.activeEffects.glitchCube) {
-                selectedWord = wordsData.find(word => word.rarity === 'glitch');
-                delete gameState.activeEffects.glitchCube;
             } else {
-                // Фильтруем слова, которые не были удалены
-                const availableWords = wordsData.filter(word => !gameState.removedWords[word.rarity] && word.rarity !== 'glitch');
+                shopItem.innerHTML = `
+                    <span>Удалить ${word.name}</span>
+                    <button class="buy-button" data-type="remove" data-rarity="${word.rarity}" data-price="${word.price}">${word.price} монет</button>
+                `;
+            }
+            
+            shopItemsElement.appendChild(shopItem);
+        }
+    });
+    
+    // Добавление обработчиков для кнопок покупки
+    document.querySelectorAll('.buy-button').forEach(button => {
+        button.addEventListener('click', handlePurchase);
+    });
+    
+    // Добавление обработчиков для кнопок переключения
+    document.querySelectorAll('.toggle-button').forEach(button => {
+        button.addEventListener('click', toggleRemoval);
+    });
+}
+
+// Переключение состояния удаления слова
+function toggleRemoval(event) {
+    const button = event.target;
+    const rarity = button.dataset.rarity;
+    
+    gameState.removedWords[rarity] = !gameState.removedWords[rarity];
+    
+    updateUI();
+    createShopItems();
+    saveGameState();
+}
+
+// Обработка покупки в магазине
+function handlePurchase(event) {
+    const button = event.target;
+    const type = button.dataset.type;
+    const price = parseInt(button.dataset.price);
+    
+    if (gameState.coins < price) {
+        alert('Недостаточно монет!');
+        return;
+    }
+    
+    if (type === 'cooldown') {
+        gameState.cooldown = Math.max(0.5, gameState.cooldown - 0.5);
+        gameState.coins -= price;
+    } else if (type === 'item') {
+        const itemId = button.dataset.id;
+        gameState.coins -= price;
+        addToInventory(itemId, 1);
+    } else if (type === 'skin') {
+        gameState.coins -= price;
+        if (button.dataset.id === 'red-button') {
+            spinButton.style.background = '#e74c3c';
+        }
+    } else if (type === 'remove') {
+        const rarity = button.dataset.rarity;
+        gameState.coins -= price;
+        gameState.purchasedRemovals[rarity] = true;
+        gameState.removedWords[rarity] = true;
+    }
+    
+    updateUI();
+    createShopItems();
+    saveGameState();
+}
+
+// Добавление предмета в инвентарь
+function addToInventory(itemId, count) {
+    if (!gameState.inventory[itemId]) {
+        gameState.inventory[itemId] = 0;
+    }
+    gameState.inventory[itemId] += count;
+}
+
+// Создание элементов библиотеки
+function createLibraryItems() {
+    libraryItemsElement.innerHTML = '';
+    
+    wordsData.forEach(word => {
+        const isUnlocked = gameState.unlockedWords[word.rarity];
+        const isRemoved = gameState.removedWords[word.rarity];
+        const isClaimed = gameState.claimedWords[word.rarity];
+        
+        const item = document.createElement('div');
+        item.className = 'library-item';
+        
+        // Пересчет шансов с учетом удаленных слов
+        let totalChance = 0;
+        wordsData.forEach(w => {
+            if (!gameState.removedWords[w.rarity] && w.rarity !== 'glitch') {
+                totalChance += w.chance;
+            }
+        });
+        
+        let chancePercent = '???';
+        if (isUnlocked && !isRemoved) {
+            chancePercent = ((word.chance / totalChance) * 100).toFixed(4) + '%';
+        } else if (isRemoved) {
+            chancePercent = '0% (удалено)';
+        }
+        
+        const bonusCoins = word.coins * 2;
+        
+        item.innerHTML = `
+            <div>
+                <span class="${word.rarity}">${word.name}</span>
+                <span> - ${chancePercent}</span>
+            </div>
+            <div>
+                ${isUnlocked && !isClaimed ? 
+                    `<button class="claim-button" data-rarity="${word.rarity}" data-coins="${bonusCoins}">Забрать ${bonusCoins} монет</button>` : 
+                    (isClaimed ? '<span>ЗАВЕРШЁННЫЙ</span>' : '<span>Неизвестно</span>')
+                }
+            </div>
+        `;
+        
+        libraryItemsElement.appendChild(item);
+    });
+    
+    // Добавление обработчиков для кнопок получения бонуса
+    document.querySelectorAll('.claim-button').forEach(button => {
+        button.addEventListener('click', claimBonus);
+    });
+}
+
+// Получение бонуса за новое слово
+function claimBonus(event) {
+    const button = event.target;
+    const rarity = button.dataset.rarity;
+    const coins = parseInt(button.dataset.coins);
+    
+    gameState.coins += coins;
+    gameState.claimedWords[rarity] = true;
+    
+    updateUI();
+    saveGameState();
+}
+
+// Создание инвентаря
+function createInventory() {
+    inventoryItemsElement.innerHTML = '';
+    
+    // Создаем 20 слотов инвентаря
+    for (let i = 0; i < 20; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'inventory-slot empty';
+        slot.innerHTML = 'Пусто';
+        inventoryItemsElement.appendChild(slot);
+    }
+    
+    // Заполняем слоты предметами
+    let slotIndex = 0;
+    for (const itemId in gameState.inventory) {
+        if (gameState.inventory[itemId] > 0 && slotIndex < 20) {
+            const item = itemsData[itemId];
+            if (item) {
+                const slot = inventoryItemsElement.children[slotIndex];
+                slot.className = 'inventory-slot';
                 
-                // Вычисляем общую сумму шансов
-                const totalChance = availableWords.reduce((sum, word) => sum + word.chance, 0);
+                const showActivateButton = itemId.includes('sphere') || 
+                                         itemId.includes('bank') || 
+                                         itemId.includes('cube');
                 
-                // Генерируем случайное число
-                const random = Math.random() * totalChance;
-                
-                // Выбираем слово на основе шансов
-                let currentChance = 0;
-                
-                for (const word of availableWords) {
-                    currentChance += word.chance;
-                    if (random <= currentChance) {
-                        selectedWord = word;
-                        break;
+                slot.innerHTML = `
+                    <div>${item.name}</div>
+                    <div class="item-count">${gameState.inventory[itemId]}</div>
+                    ${showActivateButton ? 
+                        `<button class="activate-button" data-item="${itemId}">Активировать</button>` : 
+                        ''
                     }
-                }
-            }
-            
-            // Если слово не выбрано (на всякий случай), берем первое доступное
-            if (!selectedWord) {
-                selectedWord = wordsData[0];
-            }
-            
-            // Добавляем монеты с учетом бонусов
-            let coinsEarned = selectedWord.coins;
-            
-            if (gameState.activeEffects.coinBonus) {
-                coinsEarned = Math.floor(coinsEarned * 1.5);
-            }
-            
-            if (gameState.activeEffects.cheatBonus) {
-                coinsEarned = coinsEarned * 2;
-                gameState.activeEffects.cheatBonus--;
-                if (gameState.activeEffects.cheatBonus <= 0) {
-                    delete gameState.activeEffects.cheatBonus;
-                }
-            }
-            
-            // Бонус от GLITCH
-            if (gameState.activeEffects.glitchBonus) {
-                coinsEarned = coinsEarned * 3;
-            }
-            
-            gameState.coins += coinsEarned;
-            
-            // Отмечаем слово как разблокированное в библиотеке
-            gameState.unlockedWords[selectedWord.rarity] = true;
-            
-            // Проверяем, выпала ли сфера
-            let sphereDropped = false;
-            if (gameState.activeEffects.luckSpheres) {
-                sphereDropped = true;
-                gameState.activeEffects.luckSpheres--;
-                if (gameState.activeEffects.luckSpheres <= 0) {
-                    delete gameState.activeEffects.luckSpheres;
-                }
-            } else if (gameState.activeEffects.godSpheres) {
-                sphereDropped = true;
-            } else {
-                sphereDropped = Math.random() < 0.25; // 25% шанс на сферу
-            }
-            
-            if (sphereDropped) {
-                const sphereId = `${selectedWord.rarity}-sphere`;
-                // Исправление: проверяем существование сферы
-                if (itemsData[sphereId]) {
-                    addToInventory(sphereId, 1);
-                }
-            }
-            
-            // Показываем результат
-            showResult(selectedWord, coinsEarned, sphereDropped);
-            
-            // Запускаем анимацию, если есть
-            if (hasAnimation(selectedWord)) {
-                playAnimation(selectedWord);
-            } else {
-                // Если анимации нет, просто обновляем UI после задержки
-                setTimeout(() => {
-                    updateUI();
-                    saveGameState();
-                    startCooldown();
-                }, 1000);
+                `;
+                slotIndex++;
             }
         }
+    }
+    
+    // Добавление обработчиков для кнопок активации
+    document.querySelectorAll('.activate-button').forEach(button => {
+        button.addEventListener('click', activateItem);
+    });
+}
 
-        // Проверка, есть ли у слова анимация
-        function hasAnimation(word) {
-            const wordsWithAnimation = ['divine', 'darkness', 'eternity', 'heart', 'error', 'hacker', 'sun', 'unknown', 'cosmos', 'glitch'];
-            return wordsWithAnimation.includes(word.rarity);
+// Активация предмета
+function activateItem(event) {
+    const button = event.target;
+    const itemId = button.dataset.item;
+    
+    if (!gameState.inventory[itemId] || gameState.inventory[itemId] <= 0) return;
+    
+    gameState.inventory[itemId]--;
+    applyItemEffect(itemId);
+    
+    updateUI();
+    saveGameState();
+}
+
+// Применение эффекта предмета
+function applyItemEffect(itemId) {
+    switch(itemId) {
+        case 'luck-sphere':
+            gameState.activeEffects.luckSpheres = 5;
+            alert('Сфера удачи активирована! Следующие 5 прокруток дадут сферы!');
+            break;
+        case 'piggy-bank':
+            const piggyCoins = Math.floor(Math.random() * 76) + 50;
+            gameState.coins += piggyCoins;
+            alert(`Копилка активирована! Вы получили ${piggyCoins} монет!`);
+            break;
+        case 'coin-sphere':
+            gameState.activeEffects.coinBonus = true;
+            gameState.activeEffects.coinBonusTime = Date.now() + 60000;
+            alert('Сфера монет активирована! На 1 минуту вы получаете на 50% больше монет!');
+            break;
+        case 'glitch-cube':
+            gameState.activeEffects.glitchCube = true;
+            alert('Глитч куб активирован! Следующая прокрутка даст слово GLITCH!');
+            break;
+        case 'cheat-sphere':
+            const itemIds = Object.keys(itemsData);
+            const randomItem = itemIds[Math.floor(Math.random() * itemIds.length)];
+            addToInventory(randomItem, 1);
+            
+            gameState.activeEffects.cheatBonus = 10;
+            alert(`Сфера читов активирована! Вы получили ${itemsData[randomItem].name} и следующие 10 прокруток дадут двойные монеты!`);
+            break;
+        case 'diamond-sphere':
+            const piggyCount = Math.floor(Math.random() * 16) + 15;
+            addToInventory('piggy-bank', piggyCount);
+            alert(`Алмазная сфера активирована! Вы получили ${piggyCount} копилок!`);
+            break;
+        case 'god-sphere':
+            gameState.activeEffects.godSpheres = true;
+            gameState.activeEffects.godSpheresTime = Date.now() + 120000;
+            alert('Сфера бога активирована! На 2 минуты у вас 100% шанс на сферы!');
+            break;
+        case 'hot-piggy-bank':
+            const hotCoins = Math.floor(Math.random() * 25001) + 10000;
+            gameState.coins += hotCoins;
+            alert(`Горячая копилка активирована! Вы получили ${hotCoins} монет!`);
+            break;
+    }
+}
+
+// Создание рецептов крафта
+function createCraftingRecipes() {
+    craftingRecipesElement.innerHTML = '';
+    
+    craftingRecipes.forEach(recipe => {
+        const recipeElement = document.createElement('div');
+        recipeElement.className = 'recipe';
+        
+        let ingredientsHTML = '';
+        let canCraft = true;
+        
+        recipe.ingredients.forEach(ing => {
+            const item = itemsData[ing.id];
+            const hasEnough = gameState.inventory[ing.id] >= ing.count;
+            if (!hasEnough) canCraft = false;
+            
+            if (item) {
+                ingredientsHTML += `
+                    <div style="color: ${hasEnough ? 'green' : 'red'}">
+                        ${item.name} x${ing.count} ${hasEnough ? '✓' : '✗'}
+                    </div>
+                `;
+            }
+        });
+        
+        if (recipe.requiresFlask) {
+            const hasFlask = gameState.inventory['flask'] >= 1;
+            if (!hasFlask) canCraft = false;
+            
+            ingredientsHTML += `
+                <div style="color: ${hasFlask ? 'green' : 'red'}">
+                    Колба x1 ${hasFlask ? '✓' : '✗'}
+                </div>
+            `;
         }
+        
+        const resultItem = itemsData[recipe.result.id];
+        if (resultItem) {
+            recipeElement.innerHTML = `
+                <div class="recipe-title">${recipe.name}</div>
+                <div class="recipe-ingredients">${ingredientsHTML}</div>
+                <div class="recipe-result">Результат: ${resultItem.name} x${recipe.result.count}</div>
+                <button class="craft-button" data-recipe="${recipe.id}" ${!canCraft ? 'disabled' : ''}>Создать</button>
+            `;
+        }
+        
+        craftingRecipesElement.appendChild(recipeElement);
+    });
+    
+    // Добавление обработчиков для кнопок крафта
+    document.querySelectorAll('.craft-button').forEach(button => {
+        button.addEventListener('click', craftItem);
+    });
+}
 
-        // Показ результата вращения
-        function showResult(word, coinsEarned, sphereDropped) {
-            resultElement.innerHTML = '';
-            resultElement.className = `result ${word.rarity}`;
-            
-            const wordElement = document.createElement('span');
-            wordElement.textContent = word.name;
-            resultElement.appendChild(wordElement);
-            
-            const coinsElement = document.createElement('span');
-            coinsElement.textContent = ` +${coinsEarned} монет`;
-            coinsElement.style.marginLeft = '10px';
-            coinsElement.style.color = '#27ae60';
-            resultElement.appendChild(coinsElement);
-            
-            if (sphereDropped) {
-                const sphereElement = document.createElement('span');
-                sphereElement.textContent = ' + Сфера';
-                sphereElement.style.marginLeft = '10px';
-                sphereElement.style.color = '#3498db';
-                resultElement.appendChild(sphereElement);
+// Крафт предмета
+function craftItem(event) {
+    const button = event.target;
+    const recipeId = parseInt(button.dataset.recipe);
+    const recipe = craftingRecipes.find(r => r.id === recipeId);
+    
+    if (!recipe) return;
+    
+    // Проверяем, есть ли все ингредиенты
+    const hasAllIngredients = recipe.ingredients.every(ing => 
+        gameState.inventory[ing.id] >= ing.count
+    ) && (!recipe.requiresFlask || gameState.inventory['flask'] >= 1);
+    
+    if (!hasAllIngredients) {
+        alert('Недостаточно ингредиентов для крафта!');
+        return;
+    }
+    
+    // Убираем ингредиенты
+    recipe.ingredients.forEach(ing => {
+        gameState.inventory[ing.id] -= ing.count;
+    });
+    
+    if (recipe.requiresFlask) {
+        gameState.inventory['flask'] -= 1;
+    }
+    
+    // Добавляем результат
+    addToInventory(recipe.result.id, recipe.result.count);
+    
+    alert(`Успешно создано: ${itemsData[recipe.result.id].name} x${recipe.result.count}`);
+    
+    updateUI();
+    createCraftingRecipes();
+    saveGameState();
+}
+
+// Вращение (получение случайного слова)
+function spin() {
+    if (gameState.spinInProgress) return;
+    
+    gameState.spinInProgress = true;
+    spinButton.disabled = true;
+    
+    let selectedWord = null;
+    
+    if (gameState.activeEffects.glitchCube) {
+        selectedWord = wordsData.find(word => word.rarity === 'glitch');
+        delete gameState.activeEffects.glitchCube;
+    } else {
+        const availableWords = wordsData.filter(word => !gameState.removedWords[word.rarity] && word.rarity !== 'glitch');
+        const totalChance = availableWords.reduce((sum, word) => sum + word.chance, 0);
+        const random = Math.random() * totalChance;
+        
+        let currentChance = 0;
+        for (const word of availableWords) {
+            currentChance += word.chance;
+            if (random <= currentChance) {
+                selectedWord = word;
+                break;
             }
         }
-
-        // Запуск перезарядки
-        function startCooldown() {
-            let timeLeft = gameState.cooldown;
-            
-            const countdown = setInterval(() => {
-                spinButton.textContent = `Перезарядка: ${timeLeft.toFixed(1)}с`;
-                timeLeft -= 0.1;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    spinButton.textContent = 'Крутить';
-                    spinButton.disabled = false;
-                    gameState.spinInProgress = false;
-                    saveGameState();
-                }
-            }, 100);
+    }
+    
+    if (!selectedWord) {
+        selectedWord = wordsData[0];
+    }
+    
+    let coinsEarned = selectedWord.coins;
+    
+    if (gameState.activeEffects.coinBonus) {
+        coinsEarned = Math.floor(coinsEarned * 1.5);
+    }
+    
+    if (gameState.activeEffects.cheatBonus) {
+        coinsEarned = coinsEarned * 2;
+        gameState.activeEffects.cheatBonus--;
+        if (gameState.activeEffects.cheatBonus <= 0) {
+            delete gameState.activeEffects.cheatBonus;
         }
-
-        // Воспроизведение анимации для особых слов
-        function playAnimation(word) {
-            switch(word.rarity) {
-                case 'divine':
-                    playDivineAnimation(word);
-                    break;
-                case 'darkness':
-                    playDarknessAnimation(word);
-                    break;
-                case 'eternity':
-                    playEternityAnimation(word);
-                    break;
-                case 'heart':
-                    playHeartAnimation(word);
-                    break;
-                case 'error':
-                    playErrorAnimation(word);
-                    break;
-                case 'hacker':
-                    playHackerAnimation(word);
-                    break;
-                case 'sun':
-                    playSunAnimation(word);
-                    break;
-                case 'unknown':
-                    playUnknownAnimation(word);
-                    break;
-                case 'cosmos':
-                    playCosmosAnimation(word);
-                    break;
-                case 'glitch':
-                    playGlitchAnimation(word);
-                    break;
-                default:
-                    // Для слов без специальной анимации
-                    setTimeout(() => {
-                        updateUI();
-                        saveGameState();
-                        startCooldown();
-                    }, 2000);
-                    break;
-            }
+    }
+    
+    if (gameState.activeEffects.glitchBonus) {
+        coinsEarned = coinsEarned * 3;
+    }
+    
+    gameState.coins += coinsEarned;
+    gameState.unlockedWords[selectedWord.rarity] = true;
+    
+    // Проверяем, выпала ли сфера
+    let sphereDropped = false;
+    if (gameState.activeEffects.luckSpheres) {
+        sphereDropped = true;
+        gameState.activeEffects.luckSpheres--;
+        if (gameState.activeEffects.luckSpheres <= 0) {
+            delete gameState.activeEffects.luckSpheres;
         }
-
-        // Анимация для КОСМОС
-        function playCosmosAnimation(word) {
-            // Весь сайт становится черным на 60 секунд
-            document.body.style.background = '#000';
-            document.body.style.color = '#fff';
-            
-            setTimeout(() => {
-                // Показ слова на весь экран
-                const overlay = document.createElement('div');
-                overlay.className = 'animation-overlay cosmos-animation';
-                overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
-                document.body.appendChild(overlay);
-                
-                setTimeout(() => {
-                    document.body.removeChild(overlay);
-                    
-                    // Фиолетовые взрывы в рандомных местах на 10 секунд
-                    const explosionInterval = setInterval(() => {
-                        const explosion = document.createElement('div');
-                        explosion.className = 'purple-explosion';
-                        explosion.style.left = Math.random() * window.innerWidth + 'px';
-                        explosion.style.top = Math.random() * window.innerHeight + 'px';
-                        document.body.appendChild(explosion);
-                        
-                        setTimeout(() => {
-                            explosion.style.opacity = '1';
-                            setTimeout(() => {
-                                document.body.removeChild(explosion);
-                            }, 1000);
-                        }, 100);
-                    }, 500);
-                    
-                    setTimeout(() => {
-                        clearInterval(explosionInterval);
-                        
-                        // Черная дыра на 10 секунд
-                        const blackHole = document.createElement('div');
-                        blackHole.className = 'black-hole';
-                        document.body.appendChild(blackHole);
-                        
-                        setTimeout(() => {
-                            document.body.removeChild(blackHole);
-                            
-                            // Возвращаем нормальный вид сайту
-                            document.body.style.background = '';
-                            document.body.style.color = '';
-                            
-                            finishSpin();
-                        }, 10000);
-                    }, 10000);
-                }, 3000);
-            }, 1000); // Уменьшено для тестирования (было 60000)
+    } else if (gameState.activeEffects.godSpheres) {
+        sphereDropped = true;
+    } else {
+        sphereDropped = Math.random() < 0.25;
+    }
+    
+    if (sphereDropped) {
+        const sphereId = `${selectedWord.rarity}-sphere`;
+        if (itemsData[sphereId]) {
+            addToInventory(sphereId, 1);
         }
-
-        // Анимация для GLITCH
-        function playGlitchAnimation(word) {
-            // Лагает сайт и перебирает цвета на 5 секунд
-            let colorIndex = 0;
-            const colors = ['green', 'purple', 'red', 'black'];
-            
-            const colorInterval = setInterval(() => {
-                document.body.style.background = colors[colorIndex];
-                colorIndex = (colorIndex + 1) % colors.length;
-            }, 200);
-            
-            setTimeout(() => {
-                clearInterval(colorInterval);
-                
-                // Кнопка имеет глитч версию на 10 секунд
-                spinButton.classList.add('glitch-button');
-                spinButton.setAttribute('data-text', 'Крутить');
-                
-                // x3 монет на 60 секунд
-                gameState.activeEffects.glitchBonus = true;
-                gameState.activeEffects.glitchBonusTime = Date.now() + 60000;
-                
-                setTimeout(() => {
-                    spinButton.classList.remove('glitch-button');
-                    finishSpin();
-                }, 10000);
-            }, 5000);
-        }
-
-        // Завершение вращения
-        function finishSpin() {
+    }
+    
+    // Показываем результат
+    showResult(selectedWord, coinsEarned, sphereDropped);
+    
+    // Запускаем анимацию
+    if (hasAnimation(selectedWord)) {
+        playAnimation(selectedWord);
+    } else {
+        setTimeout(() => {
             updateUI();
             saveGameState();
             startCooldown();
-        }
+        }, 1000);
+    }
+}
 
-        // Инициализация игры при загрузке страницы
-        window.addEventListener('DOMContentLoaded', initGame);
+// Проверка, есть ли у слова анимация
+function hasAnimation(word) {
+    const wordsWithAnimation = [
+        'divine', 'darkness', 'eternity', 'heart', 
+        'error', 'hacker', 'sun', 'unknown', 
+        'cosmos', 'glitch'
+    ];
+    return wordsWithAnimation.includes(word.rarity);
+}
+
+// Показ результата вращения
+function showResult(word, coinsEarned, sphereDropped) {
+    resultElement.innerHTML = '';
+    resultElement.className = `result ${word.rarity}`;
+    
+    const wordElement = document.createElement('span');
+    wordElement.textContent = word.name;
+    resultElement.appendChild(wordElement);
+    
+    const coinsElement = document.createElement('span');
+    coinsElement.textContent = ` +${coinsEarned} монет`;
+    coinsElement.style.marginLeft = '10px';
+    coinsElement.style.color = '#27ae60';
+    resultElement.appendChild(coinsElement);
+    
+    if (sphereDropped) {
+        const sphereElement = document.createElement('span');
+        sphereElement.textContent = ' + Сфера';
+        sphereElement.style.marginLeft = '10px';
+        sphereElement.style.color = '#3498db';
+        resultElement.appendChild(sphereElement);
+    }
+}
+
+// Запуск перезарядки
+function startCooldown() {
+    let timeLeft = gameState.cooldown;
+    
+    const countdown = setInterval(() => {
+        spinButton.textContent = `Перезарядка: ${timeLeft.toFixed(1)}с`;
+        timeLeft -= 0.1;
+        
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            spinButton.textContent = 'Крутить';
+            spinButton.disabled = false;
+            gameState.spinInProgress = false;
+            saveGameState();
+        }
+    }, 100);
+}
+
+// Воспроизведение анимации для особых слов
+function playAnimation(word) {
+    switch(word.rarity) {
+        case 'divine':
+            playDivineAnimation(word);
+            break;
+        case 'darkness':
+            playDarknessAnimation(word);
+            break;
+        case 'eternity':
+            playEternityAnimation(word);
+            break;
+        case 'heart':
+            playHeartAnimation(word);
+            break;
+        case 'error':
+            playErrorAnimation(word);
+            break;
+        case 'hacker':
+            playHackerAnimation(word);
+            break;
+        case 'sun':
+            playSunAnimation(word);
+            break;
+        case 'unknown':
+            playUnknownAnimation(word);
+            break;
+        case 'cosmos':
+            playCosmosAnimation(word);
+            break;
+        case 'glitch':
+            playGlitchAnimation(word);
+            break;
+        default:
+            setTimeout(() => {
+                updateUI();
+                saveGameState();
+                startCooldown();
+            }, 2000);
+            break;
+    }
+}
+
+// Анимация для БОЖЕСТВЕННЫЙ
+function playDivineAnimation(word) {
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay divine-animation';
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+        
+        const flash = document.createElement('div');
+        flash.className = 'flash yellow-flash';
+        document.body.appendChild(flash);
+        
+        setTimeout(() => {
+            flash.style.opacity = '1';
+            setTimeout(() => {
+                document.body.removeChild(flash);
+                finishSpin();
+            }, 1000);
+        }, 100);
+    }, 3000);
+}
+
+// Анимация для тьма
+function playDarknessAnimation(word) {
+    let flashCount = 0;
+    const maxFlashes = 6;
+    
+    const flashInterval = setInterval(() => {
+        const flash = document.createElement('div');
+        flash.className = 'flash black-flash';
+        document.body.appendChild(flash);
+        
+        setTimeout(() => {
+            flash.style.opacity = '0.7';
+            setTimeout(() => {
+                document.body.removeChild(flash);
+            }, 200);
+        }, 100);
+        
+        flashCount++;
+        if (flashCount >= maxFlashes) {
+            clearInterval(flashInterval);
+            
+            const overlay = document.createElement('div');
+            overlay.className = 'animation-overlay darkness-animation';
+            overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+            document.body.appendChild(overlay);
+            
+            setTimeout(() => {
+                document.body.removeChild(overlay);
+                
+                const finalFlash = document.createElement('div');
+                finalFlash.className = 'flash black-flash';
+                document.body.appendChild(finalFlash);
+                
+                setTimeout(() => {
+                    finalFlash.style.opacity = '1';
+                    setTimeout(() => {
+                        document.body.removeChild(finalFlash);
+                        finishSpin();
+                    }, 1000);
+                }, 100);
+            }, 3000);
+        }
+    }, 500);
+}
+
+// Анимация для ВЕЧНОСТЬ
+function playEternityAnimation(word) {
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay eternity-animation';
+    overlay.innerHTML = `
+        <div class="animation-text">
+            быть вечным это не быть бессмертным...<br>
+            быть вечным это...<br>
+            это быть БОГОМ
+        </div>
+    `;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+        
+        const wordOverlay = document.createElement('div');
+        wordOverlay.className = 'animation-overlay eternity-animation';
+        wordOverlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+        document.body.appendChild(wordOverlay);
+        
+        setTimeout(() => {
+            document.body.removeChild(wordOverlay);
+            
+            const flash = document.createElement('div');
+            flash.className = 'flash white-flash';
+            document.body.appendChild(flash);
+            
+            setTimeout(() => {
+                flash.style.opacity = '1';
+                setTimeout(() => {
+                    document.body.removeChild(flash);
+                    finishSpin();
+                }, 1000);
+            }, 100);
+        }, 2000);
+    }, 5000);
+}
+
+// Анимация для СЕРДЦЕ
+function playHeartAnimation(word) {
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay heart-animation';
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+        
+        const flash = document.createElement('div');
+        flash.className = 'flash red-flash';
+        document.body.appendChild(flash);
+        
+        setTimeout(() => {
+            flash.style.opacity = '1';
+            setTimeout(() => {
+                document.body.removeChild(flash);
+                finishSpin();
+            }, 1000);
+        }, 100);
+    }, 5000);
+}
+
+// Анимация для ERROR
+function playErrorAnimation(word) {
+    const buttons = document.querySelectorAll('button');
+    const originalPositions = [];
+    
+    buttons.forEach(button => {
+        const rect = button.getBoundingClientRect();
+        originalPositions.push({
+            element: button,
+            top: rect.top,
+            left: rect.left
+        });
+        
+        button.style.position = 'fixed';
+        button.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+        button.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    });
+    
+    setTimeout(() => {
+        originalPositions.forEach(pos => {
+            pos.element.style.position = '';
+            pos.element.style.top = '';
+            pos.element.style.left = '';
+        });
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'animation-overlay error-animation';
+        overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+        document.body.appendChild(overlay);
+        
+        setTimeout(() => {
+            document.body.removeChild(overlay);
+            
+            buttons.forEach(button => {
+                button.style.background = Math.random() > 0.5 ? 'purple' : 'green';
+            });
+            
+            setTimeout(() => {
+                buttons.forEach(button => {
+                    if (button.id === 'spin-button') {
+                        button.style.background = '#27ae60';
+                    } else {
+                        button.style.background = '';
+                    }
+                });
+                finishSpin();
+            }, 2000);
+        }, 3000);
+    }, 3000);
+}
+
+// Анимация для HACKER
+function playHackerAnimation(word) {
+    const originalHTML = document.body.innerHTML;
+    
+    document.body.style.background = 'black';
+    document.body.style.color = '#0f0';
+    
+    function replaceTextWithBinary(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent;
+            let binaryText = '';
+            for (let i = 0; i < text.length; i++) {
+                binaryText += Math.random() > 0.5 ? '1' : '0';
+            }
+            node.textContent = binaryText;
+        } else {
+            node.childNodes.forEach(child => {
+                replaceTextWithBinary(child);
+            });
+        }
+    }
+    
+    replaceTextWithBinary(document.body);
+    
+    setTimeout(() => {
+        document.body.innerHTML = originalHTML;
+        document.body.style.background = '';
+        document.body.style.color = '';
+        
+        initGame();
+        finishSpin();
+    }, 3000);
+}
+
+// Анимация для СОЛНЦЕ
+function playSunAnimation(word) {
+    const flash = document.createElement('div');
+    flash.className = 'flash bright-flash';
+    document.body.appendChild(flash);
+    
+    setTimeout(() => {
+        flash.style.opacity = '1';
+        setTimeout(() => {
+            document.body.removeChild(flash);
+            
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.style.background = 'yellow';
+                button.style.color = 'black';
+                button.style.boxShadow = '0 0 20px yellow';
+            });
+            
+            let flashCount = 0;
+            const flashInterval = setInterval(() => {
+                const newFlash = document.createElement('div');
+                newFlash.className = 'flash bright-flash';
+                document.body.appendChild(newFlash);
+                
+                setTimeout(() => {
+                    newFlash.style.opacity = '1';
+                    setTimeout(() => {
+                        document.body.removeChild(newFlash);
+                    }, 300);
+                }, 100);
+                
+                flashCount++;
+                if (flashCount >= 3) {
+                    clearInterval(flashInterval);
+                    
+                    setTimeout(() => {
+                        buttons.forEach(button => {
+                            if (button.id === 'spin-button') {
+                                button.style.background = '#27ae60';
+                                button.style.color = 'white';
+                                button.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                            } else {
+                                button.style.background = '';
+                                button.style.color = '';
+                                button.style.boxShadow = '';
+                            }
+                        });
+                        finishSpin();
+                    }, 1000);
+                }
+            }, 500);
+        }, 500);
+    }, 100);
+}
+
+// Анимация для НЕИЗВЕСТНО
+function playUnknownAnimation(word) {
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay unknown-animation';
+    overlay.innerHTML = `<div class="animation-text">[ REDACTED ]</div>`;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+        
+        const buttons = document.querySelectorAll('button');
+        let opacity = 1;
+        const fadeInterval = setInterval(() => {
+            opacity -= 0.1;
+            buttons.forEach(button => {
+                button.style.opacity = opacity;
+            });
+            
+            if (opacity <= 0) {
+                clearInterval(fadeInterval);
+                
+                const wordOverlay = document.createElement('div');
+                wordOverlay.className = 'animation-overlay unknown-animation';
+                wordOverlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+                document.body.appendChild(wordOverlay);
+                
+                setTimeout(() => {
+                    document.body.removeChild(wordOverlay);
+                    
+                    buttons.forEach(button => {
+                        button.style.opacity = '1';
+                    });
+                    
+                    let flashCount = 0;
+                    const maxFlashes = 5;
+                    
+                    const flashInterval = setInterval(() => {
+                        const flash = document.createElement('div');
+                        flash.className = 'flash white-flash';
+                        document.body.appendChild(flash);
+                        
+                        setTimeout(() => {
+                            flash.style.opacity = '0.7';
+                            setTimeout(() => {
+                                document.body.removeChild(flash);
+                            }, 100);
+                        }, 50);
+                        
+                        flashCount++;
+                        if (flashCount >= maxFlashes) {
+                            clearInterval(flashInterval);
+                            
+                            resultElement.style.animation = 'shake 0.5s ease infinite';
+                            
+                            setTimeout(() => {
+                                resultElement.style.animation = '';
+                                finishSpin();
+                            }, 2000);
+                        }
+                    }, 300);
+                }, 2000);
+            }
+        }, 100);
+    }, 3000);
+}
+
+// Анимация для КОСМОС
+function playCosmosAnimation(word) {
+    document.body.style.background = '#000';
+    document.body.style.color = '#fff';
+    
+    setTimeout(() => {
+        const overlay = document.createElement('div');
+        overlay.className = 'animation-overlay cosmos-animation';
+        overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+        document.body.appendChild(overlay);
+        
+        setTimeout(() => {
+            document.body.removeChild(overlay);
+            
+            const explosionInterval = setInterval(() => {
+                const explosion = document.createElement('div');
+                explosion.className = 'purple-explosion';
+                explosion.style.left = Math.random() * window.innerWidth + 'px';
+                explosion.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(explosion);
+                
+                setTimeout(() => {
+                    explosion.style.opacity = '1';
+                    setTimeout(() => {
+                        document.body.removeChild(explosion);
+                    }, 1000);
+                }, 100);
+            }, 300);
+            
+            setTimeout(() => {
+                clearInterval(explosionInterval);
+                
+                const blackHole = document.createElement('div');
+                blackHole.className = 'black-hole';
+                document.body.appendChild(blackHole);
+                
+                setTimeout(() => {
+                    document.body.removeChild(blackHole);
+                    document.body.style.background = '';
+                    document.body.style.color = '';
+                    finishSpin();
+                }, 5000);
+            }, 5000);
+        }, 3000);
+    }, 1000);
+}
+
+// Анимация для GLITCH
+function playGlitchAnimation(word) {
+    let colorIndex = 0;
+    const colors = ['green', 'purple', 'red', 'black'];
+    
+    const colorInterval = setInterval(() => {
+        document.body.style.background = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length;
+    }, 200);
+    
+    setTimeout(() => {
+        clearInterval(colorInterval);
+        
+        spinButton.classList.add('glitch-button');
+        spinButton.setAttribute('data-text', 'Крутить');
+        
+        gameState.activeEffects.glitchBonus = true;
+        gameState.activeEffects.glitchBonusTime = Date.now() + 60000;
+        
+        setTimeout(() => {
+            spinButton.classList.remove('glitch-button');
+            finishSpin();
+        }, 5000);
+    }, 3000);
+}
+
+// Завершение вращения
+function finishSpin() {
+    updateUI();
+    saveGameState();
+    startCooldown();
+}
+
+// Инициализация игры при загрузке страницы
+window.addEventListener('DOMContentLoaded', initGame);
     </script>
 </body>
 </html>
