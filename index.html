@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RNG+ V: 0.1</title>
+    <title>RNG+ Полная версия</title>
     <style>
         * {
             box-sizing: border-box;
@@ -156,7 +156,7 @@
             background: #ecf0f1;
         }
 
-        .buy-button, .claim-button, .activate-button, .craft-button {
+        .buy-button, .claim-button, .activate-button, .craft-button, .toggle-button {
             background: #3498db;
             border: none;
             border-radius: 5px;
@@ -164,15 +164,24 @@
             padding: 5px 10px;
             cursor: pointer;
             transition: background 0.3s;
+            margin-left: 5px;
         }
 
-        .buy-button:hover, .claim-button:hover, .activate-button:hover, .craft-button:hover {
+        .buy-button:hover, .claim-button:hover, .activate-button:hover, .craft-button:hover, .toggle-button:hover {
             background: #2980b9;
         }
 
-        .buy-button:disabled, .claim-button:disabled, .activate-button:disabled, .craft-button:disabled {
+        .buy-button:disabled, .claim-button:disabled, .activate-button:disabled, .craft-button:disabled, .toggle-button:disabled {
             background: #bdc3c7;
             cursor: not-allowed;
+        }
+
+        .toggle-button.active {
+            background: #e74c3c;
+        }
+
+        .toggle-button.active:hover {
+            background: #c0392b;
         }
 
         .inventory-grid {
@@ -580,31 +589,31 @@
         // Данные о предметах - добавлены все недостающие сферы
         const itemsData = {
             "flask": { name: "Колба", description: "Необходима для крафта" },
-            "common-sphere": { name: "Обычная сфера", description: "Сфера обычного слова" },
-            "uncommon-sphere": { name: "Необычная сфера", description: "Сфера необычного слова" },
-            "rare-sphere": { name: "Редкая сфера", description: "Сфера редкого слова" },
-            "epic-sphere": { name: "Эпик сфера", description: "Сфера эпик слова" },
-            "legendary-sphere": { name: "Легендарная сфера", description: "Сфера легендарного слова" },
-            "mythical-sphere": { name: "Мифическая сфера", description: "Сфера мифического слова" },
-            "shadow-light-sphere": { name: "Сфера тени/света", description: "Сфера тени/света" },
-            "purple-sphere": { name: "Фиолетовая сфера", description: "Сфера фиолетового слова" },
-            "king-sphere": { name: "Сфера короля", description: "Сфера короля" },
-            "angel-sphere": { name: "Сфера ангела", description: "Сфера ангела" },
-            "mega-sphere": { name: "Сфера мега", description: "Сфера мега" },
-            "divine-sphere": { name: "Божественная сфера", description: "Сфера божественного слова" },
-            "darkness-sphere": { name: "Сфера тьмы", description: "Сфера тьмы" },
-            "eternity-sphere": { name: "Сфера вечности", description: "Сфера вечности" },
-            "heart-sphere": { name: "Сфера сердца", description: "Сфера сердца" },
-            "error-sphere": { name: "Сфера ERROR", description: "Сфера ERROR" },
-            "hacker-sphere": { name: "Сфера HACKER", description: "Сфера HACKER" },
-            "sun-sphere": { name: "Сфера солнца", description: "Сфера солнца" },
-            "unknown-sphere": { name: "Сфера неизвестности", description: "Сфера неизвестности" },
-            "cosmos-sphere": { name: "Сфера космоса", description: "Сфера космоса" },
-            "glitch-sphere": { name: "Сфера глитча", description: "Сфера глитча" },
+            "common-sphere": { name: "Обычная сфера", description: "Сфера обычного слова", craftOnly: true },
+            "uncommon-sphere": { name: "Необычная сфера", description: "Сфера необычного слова", craftOnly: true },
+            "rare-sphere": { name: "Редкая сфера", description: "Сфера редкого слова", craftOnly: true },
+            "epic-sphere": { name: "Эпик сфера", description: "Сфера эпик слова", craftOnly: true },
+            "legendary-sphere": { name: "Легендарная сфера", description: "Сфера легендарного слова", craftOnly: true },
+            "mythical-sphere": { name: "Мифическая сфера", description: "Сфера мифического слова", craftOnly: true },
+            "shadow-light-sphere": { name: "Сфера тени/света", description: "Сфера тени/света", craftOnly: true },
+            "purple-sphere": { name: "Фиолетовая сфера", description: "Сфера фиолетового слова", craftOnly: true },
+            "king-sphere": { name: "Сфера короля", description: "Сфера короля", craftOnly: true },
+            "angel-sphere": { name: "Сфера ангела", description: "Сфера ангела", craftOnly: true },
+            "mega-sphere": { name: "Сфера мега", description: "Сфера мега", craftOnly: true },
+            "divine-sphere": { name: "Божественная сфера", description: "Сфера божественного слова", craftOnly: true },
+            "darkness-sphere": { name: "Сфера тьмы", description: "Сфера тьмы", craftOnly: true },
+            "eternity-sphere": { name: "Сфера вечности", description: "Сфера вечности", craftOnly: true },
+            "heart-sphere": { name: "Сфера сердца", description: "Сфера сердца", craftOnly: true },
+            "error-sphere": { name: "Сфера ERROR", description: "Сфера ERROR", craftOnly: true },
+            "hacker-sphere": { name: "Сфера HACKER", description: "Сфера HACKER", craftOnly: true },
+            "sun-sphere": { name: "Сфера солнца", description: "Сфера солнца", craftOnly: true },
+            "unknown-sphere": { name: "Сфера неизвестности", description: "Сфера неизвестности", craftOnly: true },
+            "cosmos-sphere": { name: "Сфера космоса", description: "Сфера космоса", craftOnly: true },
+            "glitch-sphere": { name: "Сфера глитча", description: "Сфера глитча", craftOnly: true },
             "glitch-fragment": { name: "Глитч фрагмент", description: "Фрагмент глитча" },
             "diamond": { name: "Алмаз", description: "Ценный алмаз" },
-            "big-common-sphere": { name: "Большая обычная сфера", description: "Большая сфера обычного слова" },
-            "big-uncommon-sphere": { name: "Большая необычная сфера", description: "Большая сфера необычного слова" },
+            "big-common-sphere": { name: "Большая обычная сфера", description: "Большая сфера обычного слова", craftOnly: true },
+            "big-uncommon-sphere": { name: "Большая необычная сфера", description: "Большая сфера необычного слова", craftOnly: true },
             "luck-sphere": { name: "Сфера удачи", description: "Следующие 5 прокруток имеют 100% шанс на сферу" },
             "piggy-bank": { name: "Копилка", description: "Даёт 50-125 монет" },
             "coin-sphere": { name: "Сфера монет", description: "На 1 мин зарабатывать на 50% больше монет" },
@@ -734,7 +743,8 @@
             claimedWords: {},
             inventory: {},
             activeEffects: {},
-            spinInProgress: false
+            spinInProgress: false,
+            purchasedRemovals: {} // Новое поле для отслеживания купленных удалений
         };
 
         // Элементы DOM
@@ -792,6 +802,14 @@
                     const parsedState = JSON.parse(savedState);
                     // Объединяем сохраненное состояние с текущим, чтобы сохранить структуру
                     gameState = { ...gameState, ...parsedState };
+                    
+                    // Восстанавливаем состояние кнопки после загрузки
+                    if (gameState.spinInProgress) {
+                        startCooldown();
+                    } else {
+                        spinButton.disabled = false;
+                        spinButton.textContent = 'Крутить';
+                    }
                 } catch (e) {
                     console.error('Ошибка загрузки сохранения:', e);
                 }
@@ -850,10 +868,60 @@
                 shopItemsElement.appendChild(shopItem);
             });
             
+            // Добавление кнопок удаления слов
+            wordsData.forEach(word => {
+                // Показываем только если слово не ERROR, HACKER, СОЛНЦЕ и НЕИЗВЕСТНО
+                if (!['error', 'hacker', 'sun', 'unknown'].includes(word.rarity)) {
+                    const isPurchased = gameState.purchasedRemovals[word.rarity];
+                    const isActive = gameState.removedWords[word.rarity];
+                    
+                    const shopItem = document.createElement('div');
+                    shopItem.className = 'shop-item';
+                    
+                    if (isPurchased) {
+                        // Если уже куплено, показываем кнопку переключения
+                        shopItem.innerHTML = `
+                            <span>Удалить ${word.name} - ${isActive ? 'ВКЛ' : 'ВЫКЛ'}</span>
+                            <div>
+                                <button class="toggle-button ${isActive ? 'active' : ''}" data-rarity="${word.rarity}">
+                                    ${isActive ? 'Включено' : 'Выключено'}
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        // Если не куплено, показываем кнопку покупки
+                        shopItem.innerHTML = `
+                            <span>Удалить ${word.name}</span>
+                            <button class="buy-button" data-type="remove" data-rarity="${word.rarity}" data-price="${word.price}">${word.price} монет</button>
+                        `;
+                    }
+                    
+                    shopItemsElement.appendChild(shopItem);
+                }
+            });
+            
             // Добавление обработчиков для кнопок покупки
             document.querySelectorAll('.buy-button').forEach(button => {
                 button.addEventListener('click', handlePurchase);
             });
+            
+            // Добавление обработчиков для кнопок переключения
+            document.querySelectorAll('.toggle-button').forEach(button => {
+                button.addEventListener('click', toggleRemoval);
+            });
+        }
+
+        // Переключение состояния удаления слова
+        function toggleRemoval(event) {
+            const button = event.target;
+            const rarity = button.dataset.rarity;
+            
+            // Переключаем состояние
+            gameState.removedWords[rarity] = !gameState.removedWords[rarity];
+            
+            updateUI();
+            createShopItems();
+            saveGameState();
         }
 
         // Обработка покупки в магазине
@@ -880,6 +948,12 @@
                 if (button.dataset.id === 'red-button') {
                     spinButton.style.background = '#e74c3c';
                 }
+            } else if (type === 'remove') {
+                const rarity = button.dataset.rarity;
+                gameState.coins -= price;
+                // Покупаем возможность удаления и включаем его по умолчанию
+                gameState.purchasedRemovals[rarity] = true;
+                gameState.removedWords[rarity] = true;
             }
             
             updateUI();
@@ -979,11 +1053,17 @@
                     if (item) { // Проверяем, существует ли предмет
                         const slot = inventoryItemsElement.children[slotIndex];
                         slot.className = 'inventory-slot';
+                        
+                        // Показываем кнопку активации только для предметов, которые можно активировать
+                        const showActivateButton = !item.craftOnly && 
+                            (itemId.includes('sphere') || itemId.includes('bank') || itemId.includes('cube'));
+                        
                         slot.innerHTML = `
                             <div>${item.name}</div>
                             <div class="item-count">${gameState.inventory[itemId]}</div>
-                            ${itemId.includes('sphere') || itemId.includes('bank') || itemId.includes('cube') ? 
-                                `<button class="activate-button" data-item="${itemId}">Активировать</button>` : ''
+                            ${showActivateButton ? 
+                                `<button class="activate-button" data-item="${itemId}">Активировать</button>` : 
+                                '<div style="color: #7f8c8d; font-size: 0.8rem;">Только для крафта</div>'
                             }
                         `;
                         slotIndex++;
@@ -1037,7 +1117,7 @@
                     break;
                 case 'cheat-sphere':
                     // Случайный предмет
-                    const itemIds = Object.keys(itemsData);
+                    const itemIds = Object.keys(itemsData).filter(id => !itemsData[id].craftOnly);
                     const randomItem = itemIds[Math.floor(Math.random() * itemIds.length)];
                     addToInventory(randomItem, 1);
                     
@@ -1301,6 +1381,7 @@
                     spinButton.textContent = 'Крутить';
                     spinButton.disabled = false;
                     gameState.spinInProgress = false;
+                    saveGameState();
                 }
             }, 100);
         }
