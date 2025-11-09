@@ -495,6 +495,115 @@
         .unknown { color: #ffffff; background: #000; padding: 2px 5px; border-radius: 3px; letter-spacing: 3px; }
         .cosmos { color: #ffffff; background: #000; padding: 2px 5px; border-radius: 3px; letter-spacing: 2px; }
         .glitch { color: #00ff00; background: #000; padding: 2px 5px; border-radius: 3px; }
+        /* Новые стили для вспышек */
+.red-black-flash {
+    background: linear-gradient(45deg, #ff0000, #000000);
+}
+
+.blue-flash {
+    background: #3498db;
+}
+
+.orange-flash {
+    background: #e67e22;
+}
+
+.white-black-flash {
+    background: linear-gradient(45deg, #ffffff, #000000);
+}
+
+.purple-blue-flash {
+    background: linear-gradient(45deg, #9b59b6, #3498db);
+}
+
+.gray-flash {
+    background: #7f8c8d;
+}
+
+/* Стили для анимаций с неоном */
+.divine-animation .animation-text {
+    text-shadow: 0 0 10px gold, 0 0 20px gold, 0 0 30px gold;
+}
+
+.eternity-animation .animation-text {
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+}
+
+.heart-animation .animation-text {
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+}
+
+.sun-animation .animation-text {
+    text-shadow: 0 0 10px #e67e22, 0 0 20px #e67e22, 0 0 30px #e67e22;
+}
+
+.cosmos-animation .animation-text {
+    text-shadow: 0 0 10px #9b59b6, 0 0 20px #3498db, 0 0 30px #9b59b6;
+}
+
+.infinity-animation {
+    background: #000000;
+}
+
+.infinity-animation .animation-text {
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+    color: white;
+}
+
+/* Неон для редких слов в библиотеке */
+.king, .angel, .mega, .divine, .darkness, .eternity, .heart, .error, 
+.hacker, .sun, .unknown, .cosmos, .glitch, .infinity {
+    text-shadow: 0 0 5px currentColor;
+}
+
+/* Стили для сфер в инвентаре */
+.inventory-slot {
+    position: relative;
+}
+
+/* Стили для сфер в инвентаре */
+.inventory-slot .common-sphere { color: #000000; text-shadow: 0 0 5px #000000; }
+.inventory-slot .uncommon-sphere { color: #1eff00; text-shadow: 0 0 5px #1eff00; }
+.inventory-slot .rare-sphere { color: #0070dd; text-shadow: 0 0 5px #0070dd; }
+.inventory-slot .epic-sphere { color: #a335ee; text-shadow: 0 0 5px #a335ee; }
+.inventory-slot .legendary-sphere { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
+.inventory-slot .mythical-sphere { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
+.inventory-slot .shadow-light-sphere { color: #8bfffd; text-shadow: 0 0 5px #8bfffd; }
+.inventory-slot .purple-sphere { color: #b300ff; text-shadow: 0 0 5px #b300ff; }
+.inventory-slot .king-sphere { color: #ff9900; text-shadow: 0 0 5px #ff9900; }
+.inventory-slot .angel-sphere { color: #87CEEB; text-shadow: 0 0 5px #87CEEB; }
+.inventory-slot .mega-sphere { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+.inventory-slot .divine-sphere { color: #ffff00; text-shadow: 0 0 5px #ffff00; }
+.inventory-slot .darkness-sphere { color: #000000; text-shadow: 0 0 5px #ffffff; background: #fff; padding: 2px 5px; border-radius: 3px; }
+.inventory-slot .eternity-sphere { color: #ffffff; text-shadow: 0 0 5px #ffffff; background: #2c3e50; padding: 2px 5px; border-radius: 3px; }
+.inventory-slot .heart-sphere { color: #ff0000; text-shadow: 0 0 5px #ff0000; animation: heartbeat 1s infinite; }
+.inventory-slot .error-sphere { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; background: #000; padding: 2px 5px; border-radius: 3px; }
+.inventory-slot .hacker-sphere { color: #00ff00; text-shadow: 0 0 5px #00ff00; background: #000; padding: 2px 5px; border-radius: 3px; }
+.inventory-slot .sun-sphere { color: #ffff00; text-shadow: 0 0 5px #ffff00; background: #FF8C00; padding: 2px 5px; border-radius: 3px; }
+.inventory-slot .unknown-sphere { color: #ffffff; text-shadow: 0 0 5px #ffffff; background: #000; padding: 2px 5px; border-radius: 3px; letter-spacing: 3px; }
+.inventory-slot .cosmos-sphere { color: #ffffff; text-shadow: 0 0 5px #ffffff; background: #000; padding: 2px 5px; border-radius: 3px; letter-spacing: 2px; }
+.inventory-slot .glitch-sphere { color: #00ff00; text-shadow: 0 0 5px #00ff00; background: #000; padding: 2px 5px; border-radius: 3px; }
+.inventory-slot .infinity-sphere { color: #ffffff; text-shadow: 0 0 5px #ffffff; background: #000; padding: 2px 5px; border-radius: 3px; letter-spacing: 2px; }
+
+/* Стили для созданных через крафт предметов */
+.inventory-slot .big-common-sphere { color: #000000; text-shadow: 0 0 8px #000000; font-weight: bold; }
+.inventory-slot .big-uncommon-sphere { color: #1eff00; text-shadow: 0 0 8px #1eff00; font-weight: bold; }
+.inventory-slot .luck-sphere { color: #00ff00; text-shadow: 0 0 8px #00ff00; font-weight: bold; }
+.inventory-slot .piggy-bank { color: #ffd700; text-shadow: 0 0 8px #ffd700; font-weight: bold; }
+.inventory-slot .coin-sphere { color: #ffd700; text-shadow: 0 0 8px #ffd700; font-weight: bold; }
+.inventory-slot .glitch-cube { color: #00ff00; text-shadow: 0 0 8px #00ff00; background: #000; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+.inventory-slot .cheat-sphere { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; font-weight: bold; }
+.inventory-slot .diamond-sphere { color: #b9f2ff; text-shadow: 0 0 8px #b9f2ff; font-weight: bold; }
+.inventory-slot .god-sphere { color: #ffff00; text-shadow: 0 0 8px #ffff00; font-weight: bold; }
+.inventory-slot .hot-piggy-bank { color: #ff4500; text-shadow: 0 0 8px #ff4500; font-weight: bold; }
+.inventory-slot .sphere-333 { color: #a335ee; text-shadow: 0 0 8px #a335ee; font-weight: bold; }
+.inventory-slot .luck-dome { color: #87CEEB; text-shadow: 0 0 8px #87CEEB; font-weight: bold; }
+
+/* Другие предметы */
+.inventory-slot .flask { color: #7f8c8d; text-shadow: 0 0 5px #7f8c8d; }
+.inventory-slot .glitch-fragment { color: #00ff00; text-shadow: 0 0 5px #00ff00; background: #000; padding: 2px 5px; border-radius: 3px; }
+.inventory-slot .diamond { color: #b9f2ff; text-shadow: 0 0 5px #b9f2ff; font-weight: bold; }
+/* ... и так для всех сфер */
     </style>
 </head>
 <body>
@@ -560,7 +669,7 @@
     </div>
 
     <script>
-       // Данные о словах
+      // Данные о словах
 const wordsData = [
     { name: "обычный", rarity: "common", chance: 1/3, coins: 1, price: 100 },
     { name: "необычный", rarity: "uncommon", chance: 1/5, coins: 3, price: 250 },
@@ -583,45 +692,49 @@ const wordsData = [
     { name: "СОЛНЦЕ", rarity: "sun", chance: 1/15000, coins: 2500, price: 2000000 },
     { name: "Н Е И З В Е С Т Н О", rarity: "unknown", chance: 1/22222, coins: 3456, price: 3000000 },
     { name: "К О С М О С", rarity: "cosmos", chance: 1/35000, coins: 7777, price: 5000000 },
-    { name: "GLITCH", rarity: "glitch", chance: 0, coins: 1404, price: 0 }
+    { name: "GLITCH", rarity: "glitch", chance: 0, coins: 1404, price: 0 },
+    { name: "Б Е С С К О Н Е Ч Н О С Т Ь", rarity: "infinity", chance: 1/125000, coins: 9999, price: 10000000 }
 ];
 
 // Данные о предметах
 const itemsData = {
     "flask": { name: "Колба", description: "Необходима для крафта" },
-    "common-sphere": { name: "Обычная сфера", description: "Сфера обычного слова" },
-    "uncommon-sphere": { name: "Необычная сфера", description: "Сфера необычного слова" },
-    "rare-sphere": { name: "Редкая сфера", description: "Сфера редкого слова" },
-    "epic-sphere": { name: "Эпик сфера", description: "Сфера эпик слова" },
-    "legendary-sphere": { name: "Легендарная сфера", description: "Сфера легендарного слова" },
-    "mythical-sphere": { name: "Мифическая сфера", description: "Сфера мифического слова" },
-    "shadow-light-sphere": { name: "Сфера тени/света", description: "Сфера тени/света" },
-    "purple-sphere": { name: "Фиолетовая сфера", description: "Сфера фиолетового слова" },
-    "king-sphere": { name: "Сфера короля", description: "Сфера короля" },
-    "angel-sphere": { name: "Сфера ангела", description: "Сфера ангела" },
-    "mega-sphere": { name: "Сфера мега", description: "Сфера мега" },
-    "divine-sphere": { name: "Божественная сфера", description: "Сфера божественного слова" },
-    "darkness-sphere": { name: "Сфера тьмы", description: "Сфера тьмы" },
-    "eternity-sphere": { name: "Сфера вечности", description: "Сфера вечности" },
-    "heart-sphere": { name: "Сфера сердца", description: "Сфера сердца" },
-    "error-sphere": { name: "Сфера ERROR", description: "Сфера ERROR" },
-    "hacker-sphere": { name: "Сфера HACKER", description: "Сфера HACKER" },
-    "sun-sphere": { name: "Сфера солнца", description: "Сфера солнца" },
-    "unknown-sphere": { name: "Сфера неизвестности", description: "Сфера неизвестности" },
-    "cosmos-sphere": { name: "Сфера космоса", description: "Сфера космоса" },
-    "glitch-sphere": { name: "Сфера глитча", description: "Сфера глитча" },
+    "common-sphere": { name: "Обычная сфера", description: "Сфера обычного слова", craftOnly: true },
+    "uncommon-sphere": { name: "Необычная сфера", description: "Сфера необычного слова", craftOnly: true },
+    "rare-sphere": { name: "Редкая сфера", description: "Сфера редкого слова", craftOnly: true },
+    "epic-sphere": { name: "Эпик сфера", description: "Сфера эпик слова", craftOnly: true },
+    "legendary-sphere": { name: "Легендарная сфера", description: "Сфера легендарного слова", craftOnly: true },
+    "mythical-sphere": { name: "Мифическая сфера", description: "Сфера мифического слова", craftOnly: true },
+    "shadow-light-sphere": { name: "Сфера тени/света", description: "Сфера тени/света", craftOnly: true },
+    "purple-sphere": { name: "Фиолетовая сфера", description: "Сфера фиолетового слова", craftOnly: true },
+    "king-sphere": { name: "Сфера короля", description: "Сфера короля", craftOnly: true },
+    "angel-sphere": { name: "Сфера ангела", description: "Сфера ангела", craftOnly: true },
+    "mega-sphere": { name: "Сфера мега", description: "Сфера мега", craftOnly: true },
+    "divine-sphere": { name: "Божественная сфера", description: "Сфера божественного слова", craftOnly: true },
+    "darkness-sphere": { name: "Сфера тьмы", description: "Сфера тьмы", craftOnly: true },
+    "eternity-sphere": { name: "Сфера вечности", description: "Сфера вечности", craftOnly: true },
+    "heart-sphere": { name: "Сфера сердца", description: "Сфера сердца", craftOnly: true },
+    "error-sphere": { name: "Сфера ERROR", description: "Сфера ERROR", craftOnly: true },
+    "hacker-sphere": { name: "Сфера HACKER", description: "Сфера HACKER", craftOnly: true },
+    "sun-sphere": { name: "Сфера солнца", description: "Сфера солнца", craftOnly: true },
+    "unknown-sphere": { name: "Сфера неизвестности", description: "Сфера неизвестности", craftOnly: true },
+    "cosmos-sphere": { name: "Сфера космоса", description: "Сфера космоса", craftOnly: true },
+    "glitch-sphere": { name: "Сфера глитча", description: "Сфера глитча", craftOnly: true },
+    "infinity-sphere": { name: "Сфера бесконечности", description: "Сфера бесконечности", craftOnly: true },
     "glitch-fragment": { name: "Глитч фрагмент", description: "Фрагмент глитча" },
     "diamond": { name: "Алмаз", description: "Ценный алмаз" },
-    "big-common-sphere": { name: "Большая обычная сфера", description: "Большая сфера обычного слова" },
-    "big-uncommon-sphere": { name: "Большая необычная сфера", description: "Большая сфера необычного слова" },
+    "big-common-sphere": { name: "Большая обычная сфера", description: "Большая сфера обычного слова", craftOnly: true },
+    "big-uncommon-sphere": { name: "Большая необычная сфера", description: "Большая сфера необычного слова", craftOnly: true },
     "luck-sphere": { name: "Сфера удачи", description: "Следующие 5 прокруток имеют 100% шанс на сферу" },
-    "piggy-bank": { name: "Копилка", description: "Даёт 50-125 монет" },
+    "piggy-bank": { name: "Копилка", description: "Даёт 300-1250 монет" },
     "coin-sphere": { name: "Сфера монет", description: "На 1 мин зарабатывать на 50% больше монет" },
     "glitch-cube": { name: "Глитч куб", description: "Следующая прокрутка 100% шанс на GLITCH" },
     "cheat-sphere": { name: "Сфера читов", description: "Выпадает случайный предмет и след. 10 прокруток +100% монет" },
     "diamond-sphere": { name: "Алмазная сфера", description: "Выпадает 15-30 копилок" },
     "god-sphere": { name: "Сфера бога", description: "На 2 мин 100% шанс на сферы" },
-    "hot-piggy-bank": { name: "Горячая копилка", description: "Даёт 10000-35000 монет" }
+    "hot-piggy-bank": { name: "Горячая копилка", description: "Даёт 10000-35000 монет" },
+    "sphere-333": { name: "Сфера 333", description: "Следующие 20 прокруток имеют 75% шанс на сферу" },
+    "luck-dome": { name: "Купол удачи", description: "50% получить 10000 монет или 50% потерять 5000 монет" }
 };
 
 // Рецепты крафта
@@ -731,6 +844,28 @@ const craftingRecipes = [
         ],
         result: { id: "hot-piggy-bank", count: 1 },
         requiresFlask: true
+    },
+    {
+        id: 11,
+        name: "Сфера 333",
+        ingredients: [
+            { id: "purple-sphere", count: 3 },
+            { id: "king-sphere", count: 3 },
+            { id: "mega-sphere", count: 3 }
+        ],
+        result: { id: "sphere-333", count: 1 },
+        requiresFlask: true
+    },
+    {
+        id: 12,
+        name: "Купол удачи",
+        ingredients: [
+            { id: "angel-sphere", count: 1 },
+            { id: "mega-sphere", count: 5 },
+            { id: "shadow-light-sphere", count: 10 }
+        ],
+        result: { id: "luck-dome", count: 1 },
+        requiresFlask: true
     }
 ];
 
@@ -742,14 +877,15 @@ let gameState = {
     removedWords: {},
     claimedWords: {},
     inventory: {
-        "common-sphere": 10,
-        "uncommon-sphere": 8,
-        "rare-sphere": 5,
-        "flask": 5
+        "common-sphere": 3,
+        "uncommon-sphere": 3,
+        "rare-sphere": 3,
+        "flask": 3
     },
     activeEffects: {},
     spinInProgress: false,
-    purchasedRemovals: {}
+    purchasedRemovals: {},
+    currentSkin: "green"
 };
 
 // Элементы DOM
@@ -769,17 +905,36 @@ function initGame() {
     createLibraryItems();
     createInventory();
     createCraftingRecipes();
+    applySkin(gameState.currentSkin);
     
-    // Обработчик для кнопки вращения
     spinButton.addEventListener('click', spin);
     
-    // Обработчики для вкладок
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
             const tabId = tab.dataset.tab;
             switchTab(tabId);
         });
     });
+}
+
+// Применение скина
+function applySkin(skin) {
+    gameState.currentSkin = skin;
+    switch(skin) {
+        case "green":
+            spinButton.style.background = '#27ae60';
+            break;
+        case "blue":
+            spinButton.style.background = '#3498db';
+            break;
+        case "purple":
+            spinButton.style.background = '#9b59b6';
+            break;
+        case "red":
+            spinButton.style.background = '#e74c3c';
+            break;
+    }
+    saveGameState();
 }
 
 // Переключение вкладок
@@ -848,16 +1003,22 @@ function createShopItems() {
     const shopItems = [
         { name: "Глитч артефакт", type: "item", id: "glitch-fragment", price: 404 },
         { name: "Алмаз", type: "item", id: "diamond", price: 1000 },
-        { name: "Скин на кнопку красный", type: "skin", id: "red-button", price: 125 },
+        { name: "Скин на кнопку красный", type: "skin", id: "red", price: 125 },
+        { name: "Скин на кнопку синий", type: "skin", id: "blue", price: 150 },
+        { name: "Скин на кнопку фиолетовый", type: "skin", id: "purple", price: 175 },
+        { name: "Скин на кнопку зелёный", type: "skin", id: "green", price: 0 },
         { name: "Купол", type: "item", id: "flask", price: 50 }
     ];
     
     shopItems.forEach(item => {
         const shopItem = document.createElement('div');
         shopItem.className = 'shop-item';
+        const isCurrentSkin = item.type === 'skin' && gameState.currentSkin === item.id;
         shopItem.innerHTML = `
-            <span>${item.name}</span>
-            <button class="buy-button" data-type="${item.type}" data-id="${item.id}" data-price="${item.price}">${item.price} монет</button>
+            <span>${item.name}${isCurrentSkin ? ' (активен)' : ''}</span>
+            <button class="buy-button" data-type="${item.type}" data-id="${item.id}" data-price="${item.price}" ${isCurrentSkin ? 'disabled' : ''}>
+                ${item.price === 0 ? 'Бесплатно' : item.price + ' монет'}
+            </button>
         `;
         shopItemsElement.appendChild(shopItem);
     });
@@ -891,12 +1052,10 @@ function createShopItems() {
         }
     });
     
-    // Добавление обработчиков для кнопок покупки
     document.querySelectorAll('.buy-button').forEach(button => {
         button.addEventListener('click', handlePurchase);
     });
     
-    // Добавление обработчиков для кнопок переключения
     document.querySelectorAll('.toggle-button').forEach(button => {
         button.addEventListener('click', toggleRemoval);
     });
@@ -920,7 +1079,7 @@ function handlePurchase(event) {
     const type = button.dataset.type;
     const price = parseInt(button.dataset.price);
     
-    if (gameState.coins < price) {
+    if (gameState.coins < price && price > 0) {
         alert('Недостаточно монет!');
         return;
     }
@@ -933,10 +1092,9 @@ function handlePurchase(event) {
         gameState.coins -= price;
         addToInventory(itemId, 1);
     } else if (type === 'skin') {
+        const skinId = button.dataset.id;
         gameState.coins -= price;
-        if (button.dataset.id === 'red-button') {
-            spinButton.style.background = '#e74c3c';
-        }
+        applySkin(skinId);
     } else if (type === 'remove') {
         const rarity = button.dataset.rarity;
         gameState.coins -= price;
@@ -969,7 +1127,6 @@ function createLibraryItems() {
         const item = document.createElement('div');
         item.className = 'library-item';
         
-        // Пересчет шансов с учетом удаленных слов
         let totalChance = 0;
         wordsData.forEach(w => {
             if (!gameState.removedWords[w.rarity] && w.rarity !== 'glitch') {
@@ -1002,7 +1159,6 @@ function createLibraryItems() {
         libraryItemsElement.appendChild(item);
     });
     
-    // Добавление обработчиков для кнопок получения бонуса
     document.querySelectorAll('.claim-button').forEach(button => {
         button.addEventListener('click', claimBonus);
     });
@@ -1025,7 +1181,6 @@ function claimBonus(event) {
 function createInventory() {
     inventoryItemsElement.innerHTML = '';
     
-    // Создаем 20 слотов инвентаря
     for (let i = 0; i < 20; i++) {
         const slot = document.createElement('div');
         slot.className = 'inventory-slot empty';
@@ -1033,7 +1188,6 @@ function createInventory() {
         inventoryItemsElement.appendChild(slot);
     }
     
-    // Заполняем слоты предметами
     let slotIndex = 0;
     for (const itemId in gameState.inventory) {
         if (gameState.inventory[itemId] > 0 && slotIndex < 20) {
@@ -1042,16 +1196,15 @@ function createInventory() {
                 const slot = inventoryItemsElement.children[slotIndex];
                 slot.className = 'inventory-slot';
                 
-                const showActivateButton = itemId.includes('sphere') || 
-                                         itemId.includes('bank') || 
-                                         itemId.includes('cube');
+                const showActivateButton = !item.craftOnly && 
+                    (itemId.includes('sphere') || itemId.includes('bank') || itemId.includes('cube') || itemId.includes('dome'));
                 
                 slot.innerHTML = `
                     <div>${item.name}</div>
                     <div class="item-count">${gameState.inventory[itemId]}</div>
                     ${showActivateButton ? 
                         `<button class="activate-button" data-item="${itemId}">Активировать</button>` : 
-                        ''
+                        '<div style="color: #7f8c8d; font-size: 0.8rem;">Только для крафта</div>'
                     }
                 `;
                 slotIndex++;
@@ -1059,9 +1212,17 @@ function createInventory() {
         }
     }
     
-    // Добавление обработчиков для кнопок активации
     document.querySelectorAll('.activate-button').forEach(button => {
         button.addEventListener('click', activateItem);
+        // В функции createInventory() замените строку с созданием слота:
+slot.innerHTML = `
+    <div class="${itemId.replace('-', '-')}">${item.name}</div>
+    <div class="item-count">${gameState.inventory[itemId]}</div>
+    ${showActivateButton ? 
+        `<button class="activate-button" data-item="${itemId}">Активировать</button>` : 
+        '<div style="color: #7f8c8d; font-size: 0.8rem;">Только для крафта</div>'
+    }
+`;
     });
 }
 
@@ -1087,7 +1248,7 @@ function applyItemEffect(itemId) {
             alert('Сфера удачи активирована! Следующие 5 прокруток дадут сферы!');
             break;
         case 'piggy-bank':
-            const piggyCoins = Math.floor(Math.random() * 76) + 50;
+            const piggyCoins = Math.floor(Math.random() * 951) + 300;
             gameState.coins += piggyCoins;
             alert(`Копилка активирована! Вы получили ${piggyCoins} монет!`);
             break;
@@ -1101,7 +1262,7 @@ function applyItemEffect(itemId) {
             alert('Глитч куб активирован! Следующая прокрутка даст слово GLITCH!');
             break;
         case 'cheat-sphere':
-            const itemIds = Object.keys(itemsData);
+            const itemIds = Object.keys(itemsData).filter(id => !itemsData[id].craftOnly);
             const randomItem = itemIds[Math.floor(Math.random() * itemIds.length)];
             addToInventory(randomItem, 1);
             
@@ -1122,6 +1283,19 @@ function applyItemEffect(itemId) {
             const hotCoins = Math.floor(Math.random() * 25001) + 10000;
             gameState.coins += hotCoins;
             alert(`Горячая копилка активирована! Вы получили ${hotCoins} монет!`);
+            break;
+        case 'sphere-333':
+            gameState.activeEffects.sphere333 = 20;
+            alert('Сфера 333 активирована! Следующие 20 прокруток имеют 75% шанс на сферу!');
+            break;
+        case 'luck-dome':
+            if (Math.random() < 0.5) {
+                gameState.coins += 10000;
+                alert('Купол удачи активирован! Вы получили 10000 монет!');
+            } else {
+                gameState.coins = Math.max(0, gameState.coins - 5000);
+                alert('Купол удачи активирован! Вы потеряли 5000 монет!');
+            }
             break;
     }
 }
@@ -1175,7 +1349,6 @@ function createCraftingRecipes() {
         craftingRecipesElement.appendChild(recipeElement);
     });
     
-    // Добавление обработчиков для кнопок крафта
     document.querySelectorAll('.craft-button').forEach(button => {
         button.addEventListener('click', craftItem);
     });
@@ -1189,7 +1362,6 @@ function craftItem(event) {
     
     if (!recipe) return;
     
-    // Проверяем, есть ли все ингредиенты
     const hasAllIngredients = recipe.ingredients.every(ing => 
         gameState.inventory[ing.id] >= ing.count
     ) && (!recipe.requiresFlask || gameState.inventory['flask'] >= 1);
@@ -1199,7 +1371,6 @@ function craftItem(event) {
         return;
     }
     
-    // Убираем ингредиенты
     recipe.ingredients.forEach(ing => {
         gameState.inventory[ing.id] -= ing.count;
     });
@@ -1208,7 +1379,6 @@ function craftItem(event) {
         gameState.inventory['flask'] -= 1;
     }
     
-    // Добавляем результат
     addToInventory(recipe.result.id, recipe.result.count);
     
     alert(`Успешно создано: ${itemsData[recipe.result.id].name} x${recipe.result.count}`);
@@ -1251,8 +1421,11 @@ function spin() {
     
     let coinsEarned = selectedWord.coins;
     
-    if (gameState.activeEffects.coinBonus) {
+    // Проверяем временные бонусы
+    if (gameState.activeEffects.coinBonus && gameState.activeEffects.coinBonusTime > Date.now()) {
         coinsEarned = Math.floor(coinsEarned * 1.5);
+    } else if (gameState.activeEffects.coinBonus) {
+        delete gameState.activeEffects.coinBonus;
     }
     
     if (gameState.activeEffects.cheatBonus) {
@@ -1263,8 +1436,10 @@ function spin() {
         }
     }
     
-    if (gameState.activeEffects.glitchBonus) {
+    if (gameState.activeEffects.glitchBonus && gameState.activeEffects.glitchBonusTime > Date.now()) {
         coinsEarned = coinsEarned * 3;
+    } else if (gameState.activeEffects.glitchBonus) {
+        delete gameState.activeEffects.glitchBonus;
     }
     
     gameState.coins += coinsEarned;
@@ -1278,8 +1453,16 @@ function spin() {
         if (gameState.activeEffects.luckSpheres <= 0) {
             delete gameState.activeEffects.luckSpheres;
         }
-    } else if (gameState.activeEffects.godSpheres) {
+    } else if (gameState.activeEffects.godSpheres && gameState.activeEffects.godSpheresTime > Date.now()) {
         sphereDropped = true;
+    } else if (gameState.activeEffects.godSpheres) {
+        delete gameState.activeEffects.godSpheres;
+    } else if (gameState.activeEffects.sphere333) {
+        sphereDropped = Math.random() < 0.75;
+        gameState.activeEffects.sphere333--;
+        if (gameState.activeEffects.sphere333 <= 0) {
+            delete gameState.activeEffects.sphere333;
+        }
     } else {
         sphereDropped = Math.random() < 0.25;
     }
@@ -1291,10 +1474,8 @@ function spin() {
         }
     }
     
-    // Показываем результат
     showResult(selectedWord, coinsEarned, sphereDropped);
     
-    // Запускаем анимацию
     if (hasAnimation(selectedWord)) {
         playAnimation(selectedWord);
     } else {
@@ -1311,7 +1492,7 @@ function hasAnimation(word) {
     const wordsWithAnimation = [
         'divine', 'darkness', 'eternity', 'heart', 
         'error', 'hacker', 'sun', 'unknown', 
-        'cosmos', 'glitch'
+        'cosmos', 'glitch', 'infinity'
     ];
     return wordsWithAnimation.includes(word.rarity);
 }
@@ -1391,6 +1572,9 @@ function playAnimation(word) {
         case 'glitch':
             playGlitchAnimation(word);
             break;
+        case 'infinity':
+            playInfinityAnimation(word);
+            break;
         default:
             setTimeout(() => {
                 updateUI();
@@ -1412,11 +1596,12 @@ function playDivineAnimation(word) {
         document.body.removeChild(overlay);
         
         const flash = document.createElement('div');
-        flash.className = 'flash yellow-flash';
+        flash.className = 'flash white-flash';
         document.body.appendChild(flash);
+        flash.style.opacity = '1';
         
         setTimeout(() => {
-            flash.style.opacity = '1';
+            flash.style.opacity = '0';
             setTimeout(() => {
                 document.body.removeChild(flash);
                 finishSpin();
@@ -1427,86 +1612,52 @@ function playDivineAnimation(word) {
 
 // Анимация для тьма
 function playDarknessAnimation(word) {
-    let flashCount = 0;
-    const maxFlashes = 6;
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay darkness-animation';
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+    document.body.appendChild(overlay);
     
-    const flashInterval = setInterval(() => {
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+        
         const flash = document.createElement('div');
-        flash.className = 'flash black-flash';
+        flash.className = 'flash red-black-flash';
         document.body.appendChild(flash);
+        flash.style.opacity = '1';
         
         setTimeout(() => {
-            flash.style.opacity = '0.7';
+            flash.style.opacity = '0';
             setTimeout(() => {
                 document.body.removeChild(flash);
-            }, 200);
+                finishSpin();
+            }, 1000);
         }, 100);
-        
-        flashCount++;
-        if (flashCount >= maxFlashes) {
-            clearInterval(flashInterval);
-            
-            const overlay = document.createElement('div');
-            overlay.className = 'animation-overlay darkness-animation';
-            overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
-            document.body.appendChild(overlay);
-            
-            setTimeout(() => {
-                document.body.removeChild(overlay);
-                
-                const finalFlash = document.createElement('div');
-                finalFlash.className = 'flash black-flash';
-                document.body.appendChild(finalFlash);
-                
-                setTimeout(() => {
-                    finalFlash.style.opacity = '1';
-                    setTimeout(() => {
-                        document.body.removeChild(finalFlash);
-                        finishSpin();
-                    }, 1000);
-                }, 100);
-            }, 3000);
-        }
-    }, 500);
+    }, 3000);
 }
 
 // Анимация для ВЕЧНОСТЬ
 function playEternityAnimation(word) {
     const overlay = document.createElement('div');
     overlay.className = 'animation-overlay eternity-animation';
-    overlay.innerHTML = `
-        <div class="animation-text">
-            быть вечным это не быть бессмертным...<br>
-            быть вечным это...<br>
-            это быть БОГОМ
-        </div>
-    `;
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
     document.body.appendChild(overlay);
     
     setTimeout(() => {
         document.body.removeChild(overlay);
         
-        const wordOverlay = document.createElement('div');
-        wordOverlay.className = 'animation-overlay eternity-animation';
-        wordOverlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
-        document.body.appendChild(wordOverlay);
+        const flash = document.createElement('div');
+        flash.className = 'flash white-flash';
+        document.body.appendChild(flash);
+        flash.style.opacity = '1';
         
         setTimeout(() => {
-            document.body.removeChild(wordOverlay);
-            
-            const flash = document.createElement('div');
-            flash.className = 'flash white-flash';
-            document.body.appendChild(flash);
-            
+            flash.style.opacity = '0';
             setTimeout(() => {
-                flash.style.opacity = '1';
-                setTimeout(() => {
-                    document.body.removeChild(flash);
-                    finishSpin();
-                }, 1000);
-            }, 100);
-        }, 2000);
-    }, 5000);
+                document.body.removeChild(flash);
+                finishSpin();
+            }, 1000);
+        }, 100);
+    }, 3000);
 }
 
 // Анимация для СЕРДЦЕ
@@ -1522,9 +1673,10 @@ function playHeartAnimation(word) {
         const flash = document.createElement('div');
         flash.className = 'flash red-flash';
         document.body.appendChild(flash);
+        flash.style.opacity = '1';
         
         setTimeout(() => {
-            flash.style.opacity = '1';
+            flash.style.opacity = '0';
             setTimeout(() => {
                 document.body.removeChild(flash);
                 finishSpin();
@@ -1533,282 +1685,180 @@ function playHeartAnimation(word) {
     }, 5000);
 }
 
-// Анимация для ERROR
-function playErrorAnimation(word) {
-    const buttons = document.querySelectorAll('button');
-    const originalPositions = [];
-    
-    buttons.forEach(button => {
-        const rect = button.getBoundingClientRect();
-        originalPositions.push({
-            element: button,
-            top: rect.top,
-            left: rect.left
-        });
-        
-        button.style.position = 'fixed';
-        button.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-        button.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-    });
+// Анимация для АНГЕЛ
+function playAngelAnimation(word) {
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay angel-animation';
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+    document.body.appendChild(overlay);
     
     setTimeout(() => {
-        originalPositions.forEach(pos => {
-            pos.element.style.position = '';
-            pos.element.style.top = '';
-            pos.element.style.left = '';
-        });
+        document.body.removeChild(overlay);
         
-        const overlay = document.createElement('div');
-        overlay.className = 'animation-overlay error-animation';
-        overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
-        document.body.appendChild(overlay);
+        const flash = document.createElement('div');
+        flash.className = 'flash blue-flash';
+        document.body.appendChild(flash);
+        flash.style.opacity = '1';
         
         setTimeout(() => {
-            document.body.removeChild(overlay);
-            
-            buttons.forEach(button => {
-                button.style.background = Math.random() > 0.5 ? 'purple' : 'green';
-            });
-            
+            flash.style.opacity = '0';
             setTimeout(() => {
-                buttons.forEach(button => {
-                    if (button.id === 'spin-button') {
-                        button.style.background = '#27ae60';
-                    } else {
-                        button.style.background = '';
-                    }
-                });
+                document.body.removeChild(flash);
                 finishSpin();
-            }, 2000);
-        }, 3000);
-    }, 3000);
-}
-
-// Анимация для HACKER
-function playHackerAnimation(word) {
-    const originalHTML = document.body.innerHTML;
-    
-    document.body.style.background = 'black';
-    document.body.style.color = '#0f0';
-    
-    function replaceTextWithBinary(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            const text = node.textContent;
-            let binaryText = '';
-            for (let i = 0; i < text.length; i++) {
-                binaryText += Math.random() > 0.5 ? '1' : '0';
-            }
-            node.textContent = binaryText;
-        } else {
-            node.childNodes.forEach(child => {
-                replaceTextWithBinary(child);
-            });
-        }
-    }
-    
-    replaceTextWithBinary(document.body);
-    
-    setTimeout(() => {
-        document.body.innerHTML = originalHTML;
-        document.body.style.background = '';
-        document.body.style.color = '';
-        
-        initGame();
-        finishSpin();
+            }, 1000);
+        }, 100);
     }, 3000);
 }
 
 // Анимация для СОЛНЦЕ
 function playSunAnimation(word) {
-    const flash = document.createElement('div');
-    flash.className = 'flash bright-flash';
-    document.body.appendChild(flash);
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay sun-animation';
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+    document.body.appendChild(overlay);
     
     setTimeout(() => {
+        document.body.removeChild(overlay);
+        
+        const flash = document.createElement('div');
+        flash.className = 'flash orange-flash';
+        document.body.appendChild(flash);
         flash.style.opacity = '1';
+        
         setTimeout(() => {
-            document.body.removeChild(flash);
-            
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(button => {
-                button.style.background = 'yellow';
-                button.style.color = 'black';
-                button.style.boxShadow = '0 0 20px yellow';
-            });
-            
-            let flashCount = 0;
-            const flashInterval = setInterval(() => {
-                const newFlash = document.createElement('div');
-                newFlash.className = 'flash bright-flash';
-                document.body.appendChild(newFlash);
-                
-                setTimeout(() => {
-                    newFlash.style.opacity = '1';
-                    setTimeout(() => {
-                        document.body.removeChild(newFlash);
-                    }, 300);
-                }, 100);
-                
-                flashCount++;
-                if (flashCount >= 3) {
-                    clearInterval(flashInterval);
-                    
-                    setTimeout(() => {
-                        buttons.forEach(button => {
-                            if (button.id === 'spin-button') {
-                                button.style.background = '#27ae60';
-                                button.style.color = 'white';
-                                button.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                            } else {
-                                button.style.background = '';
-                                button.style.color = '';
-                                button.style.boxShadow = '';
-                            }
-                        });
-                        finishSpin();
-                    }, 1000);
-                }
-            }, 500);
-        }, 500);
-    }, 100);
+            flash.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(flash);
+                finishSpin();
+            }, 1000);
+        }, 100);
+    }, 3000);
 }
 
 // Анимация для НЕИЗВЕСТНО
 function playUnknownAnimation(word) {
     const overlay = document.createElement('div');
     overlay.className = 'animation-overlay unknown-animation';
-    overlay.innerHTML = `<div class="animation-text">[ REDACTED ]</div>`;
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
     document.body.appendChild(overlay);
     
     setTimeout(() => {
         document.body.removeChild(overlay);
         
-        const buttons = document.querySelectorAll('button');
-        let opacity = 1;
-        const fadeInterval = setInterval(() => {
-            opacity -= 0.1;
-            buttons.forEach(button => {
-                button.style.opacity = opacity;
-            });
-            
-            if (opacity <= 0) {
-                clearInterval(fadeInterval);
-                
-                const wordOverlay = document.createElement('div');
-                wordOverlay.className = 'animation-overlay unknown-animation';
-                wordOverlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
-                document.body.appendChild(wordOverlay);
-                
-                setTimeout(() => {
-                    document.body.removeChild(wordOverlay);
-                    
-                    buttons.forEach(button => {
-                        button.style.opacity = '1';
-                    });
-                    
-                    let flashCount = 0;
-                    const maxFlashes = 5;
-                    
-                    const flashInterval = setInterval(() => {
-                        const flash = document.createElement('div');
-                        flash.className = 'flash white-flash';
-                        document.body.appendChild(flash);
-                        
-                        setTimeout(() => {
-                            flash.style.opacity = '0.7';
-                            setTimeout(() => {
-                                document.body.removeChild(flash);
-                            }, 100);
-                        }, 50);
-                        
-                        flashCount++;
-                        if (flashCount >= maxFlashes) {
-                            clearInterval(flashInterval);
-                            
-                            resultElement.style.animation = 'shake 0.5s ease infinite';
-                            
-                            setTimeout(() => {
-                                resultElement.style.animation = '';
-                                finishSpin();
-                            }, 2000);
-                        }
-                    }, 300);
-                }, 2000);
-            }
+        const flash = document.createElement('div');
+        flash.className = 'flash white-black-flash';
+        document.body.appendChild(flash);
+        flash.style.opacity = '1';
+        
+        setTimeout(() => {
+            flash.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(flash);
+                finishSpin();
+            }, 1000);
         }, 100);
     }, 3000);
 }
 
 // Анимация для КОСМОС
 function playCosmosAnimation(word) {
-    document.body.style.background = '#000';
-    document.body.style.color = '#fff';
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay cosmos-animation';
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+    document.body.appendChild(overlay);
     
     setTimeout(() => {
-        const overlay = document.createElement('div');
-        overlay.className = 'animation-overlay cosmos-animation';
-        overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
-        document.body.appendChild(overlay);
+        document.body.removeChild(overlay);
+        
+        const flash = document.createElement('div');
+        flash.className = 'flash purple-blue-flash';
+        document.body.appendChild(flash);
+        flash.style.opacity = '1';
         
         setTimeout(() => {
-            document.body.removeChild(overlay);
-            
-            const explosionInterval = setInterval(() => {
-                const explosion = document.createElement('div');
-                explosion.className = 'purple-explosion';
-                explosion.style.left = Math.random() * window.innerWidth + 'px';
-                explosion.style.top = Math.random() * window.innerHeight + 'px';
-                document.body.appendChild(explosion);
-                
-                setTimeout(() => {
-                    explosion.style.opacity = '1';
-                    setTimeout(() => {
-                        document.body.removeChild(explosion);
-                    }, 1000);
-                }, 100);
-            }, 300);
-            
+            flash.style.opacity = '0';
             setTimeout(() => {
-                clearInterval(explosionInterval);
+                document.body.removeChild(flash);
+                finishSpin();
+            }, 1000);
+        }, 100);
+    }, 3000);
+}
+
+// Анимация для БЕСКОНЕЧНОСТЬ
+function playInfinityAnimation(word) {
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay infinity-animation';
+    overlay.innerHTML = `<div class="animation-text">${word.name}</div>`;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+        
+        const flash = document.createElement('div');
+        flash.className = 'flash gray-flash';
+        document.body.appendChild(flash);
+        flash.style.opacity = '1';
+        
+        setTimeout(() => {
+            flash.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(flash);
                 
-                const blackHole = document.createElement('div');
-                blackHole.className = 'black-hole';
-                document.body.appendChild(blackHole);
-                
-                setTimeout(() => {
-                    document.body.removeChild(blackHole);
-                    document.body.style.background = '';
-                    document.body.style.color = '';
-                    finishSpin();
-                }, 5000);
-            }, 5000);
-        }, 3000);
-    }, 1000);
+                // Показываем все слова до бесконечности
+                let currentIndex = 0;
+                const wordInterval = setInterval(() => {
+                    if (currentIndex < wordsData.length - 1) { // -1 чтобы исключить саму бесконечность
+                        const currentWord = wordsData[currentIndex];
+                        const wordOverlay = document.createElement('div');
+                        wordOverlay.className = `animation-overlay ${currentWord.rarity}-animation`;
+                        wordOverlay.innerHTML = `<div class="animation-text">${currentWord.name}</div>`;
+                        document.body.appendChild(wordOverlay);
+                        
+                        setTimeout(() => {
+                            document.body.removeChild(wordOverlay);
+                        }, 150);
+                        
+                        currentIndex++;
+                    } else {
+                        clearInterval(wordInterval);
+                        
+                        // Финальный текст
+                        const finalOverlay = document.createElement('div');
+                        finalOverlay.className = 'animation-overlay infinity-animation';
+                        finalOverlay.innerHTML = `<div class="animation-text">... бесконечность не предел</div>`;
+                        document.body.appendChild(finalOverlay);
+                        
+                        setTimeout(() => {
+                            document.body.removeChild(finalOverlay);
+                            finishSpin();
+                        }, 10000);
+                    }
+                }, 200);
+            }, 2000);
+        }, 100);
+    }, 3000);
 }
 
 // Анимация для GLITCH
 function playGlitchAnimation(word) {
-    let colorIndex = 0;
-    const colors = ['green', 'purple', 'red', 'black'];
+    const overlay = document.createElement('div');
+    overlay.className = 'animation-overlay glitch-animation';
     
-    const colorInterval = setInterval(() => {
-        document.body.style.background = colors[colorIndex];
-        colorIndex = (colorIndex + 1) % colors.length;
-    }, 200);
+    // Создаем текст с разными цветами для каждой буквы
+    let glitchText = '';
+    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+    for (let i = 0; i < word.name.length; i++) {
+        const color = colors[i % colors.length];
+        glitchText += `<span style="color: ${color}">${word.name[i]}</span>`;
+    }
+    
+    overlay.innerHTML = `<div class="animation-text">${glitchText}</div>`;
+    document.body.appendChild(overlay);
     
     setTimeout(() => {
-        clearInterval(colorInterval);
-        
-        spinButton.classList.add('glitch-button');
-        spinButton.setAttribute('data-text', 'Крутить');
-        
-        gameState.activeEffects.glitchBonus = true;
-        gameState.activeEffects.glitchBonusTime = Date.now() + 60000;
-        
-        setTimeout(() => {
-            spinButton.classList.remove('glitch-button');
-            finishSpin();
-        }, 5000);
+        document.body.removeChild(overlay);
+        finishSpin();
     }, 3000);
 }
 
